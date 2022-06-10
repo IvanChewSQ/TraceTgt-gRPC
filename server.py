@@ -40,9 +40,10 @@ class Checkin(Tracetogether_pb2_grpc.CheckinServicer):
     try:
       with open('data.json', 'w') as json_file:
         json.dump(data, json_file)
+        return Tracetogether_pb2.details(message='%s, Completed!' % request.status)
     except: 
       return Tracetogether_pb2.details(message='%s, Unsuccessful! Please try again...' % request.status)
-    return Tracetogether_pb2.details(message='%s, Completed!' % request.status)
+    
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
