@@ -14,18 +14,35 @@
 """The Python implementation of the GRPC helloworld.Greeter server."""
 
 from concurrent import futures
+from datetime import date, datetime
 import logging
-
+import json
 import grpc
 import Tracetogether_pb2, Tracetogether_pb2_grpc
 
-
-
-
 class Greeter(Tracetogether_pb2_grpc.GreeterServicer):
-    
+
   def SayHello(self, request, context):
     return Tracetogether_pb2.HelloReply(message='Connected!, %s!' % request.name)
+
+class Checkin(Tracetogether_pb2_grpc.CheckinServicer):
+
+  def details(self, request, context):
+    data = {
+        "Name": request.name,
+        "NRIC": request.nric,
+        "Location": request.location,
+        "Status": request.status,
+        "Date": date.today().strftime("%B %d, %Y"),
+        "Time": datetime.now().strftime("%H:%M:%S")
+    }
+
+    try:
+      with open('data.json', 'w') as json_file:
+        json.dump(data, json_file)
+    except: 
+      return Tracetogether_pb2.details(message='%s, Unsuccessful! Please try again...' % request.status)
+    return Tracetogether_pb2.details(message='%s, Completed!' % request.status)
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -34,6 +51,9 @@ def serve():
     server.add_insecure_port(listen_addr)
     logging.info('TraceTogether server starting on %s', listen_addr)
     print('TraceTogether server starting on %s', listen_addr)
+
+    Tracetogether_pb2_grpc.add_CheckinServicer_to_server(Checkin(),server)
+    
     server.start()
     server.wait_for_termination()
 
