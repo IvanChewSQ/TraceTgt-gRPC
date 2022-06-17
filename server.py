@@ -13,18 +13,34 @@
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
 
+from datetime import datetime
 from concurrent import futures
 from datetime import date, datetime
 import logging
+import time
 import json
 import grpc
 import Tracetogether_pb2, Tracetogether_pb2_grpc
 
-class Greeter(Tracetogether_pb2_grpc.GreeterServicer):
+class UserInfoService(Tracetogether_pb2_grpc.UserInfoServicer):
+    def Username(self, request, context):
+        response = Tracetogether_pb2.UserRequest()
+        response.name = users_method.users_info(request.user_id,request.name,request.password)
+        return response
 
-  def SayHello(self, request, context):
-    return Tracetogether_pb2.HelloReply(message='Connected!, %s!' % request.name)
 
+
+server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+Tracetogether_pb2_grpc.add_UserInfoServicer_to_server(
+        UserInfoService(), server)
+print('Starting server. Listening on port 50051.')
+server.add_insecure_port('[::]:50051')
+server.start()
+try:
+    while True:
+        time.sleep(86400)
+except KeyboardInterrupt:
+    server.stop(0)
 class Checkin(Tracetogether_pb2_grpc.CheckinServicer):
 
   def details(self, request, context):
@@ -47,7 +63,7 @@ class Checkin(Tracetogether_pb2_grpc.CheckinServicer):
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    (Greeter(), server)
+    (Checkin(), server)
     listen_addr = '[::]:50051'
     server.add_insecure_port(listen_addr)
     logging.info('TraceTogether server starting on %s', listen_addr)

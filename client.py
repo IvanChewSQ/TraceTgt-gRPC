@@ -1,20 +1,29 @@
 """The Python implementation of the GRPC helloworld.Greeter client."""
 
+from datetime import datetime
 from __future__ import print_function
 import logging
 from mimetypes import init
 import grpc
 
 import Tracetogether_pb2, Tracetogether_pb2_grpc
+class client:
 
-def run():
-    # NOTE(gRPC Python Team): .close() is possible on a channel and should be
-    # used in circumstances in which the with statement does not fit the needs
-    # of the code.
-    with grpc.insecure_channel('localhost:50051') as channel:
-        stub = Tracetogether_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(Tracetogether_pb2.HelloRequest(name='Jeremy Chng'))
-    print("Welcome to the Tracetogether Client! Connecting..." + response.message)
+def SetUsersData():
+    # open a gRPC channel
+    channel = grpc.insecure_channel('localhost:50051')
+    # create a stub (client)
+    stub = Tracetogether_pb2_grpc.UserInfoStub(channel)
+    #input data
+    user_id  = int(input('Enter User Id : '))
+    username = input('Enter Username : ')
+    password = input('Enter Password : ')
+    # create a valid request message
+    data = Tracetogether_pb2.UserRequest(user_id=user_id,name=username,password=password)
+    # make the call
+    response = stub.Username(data)
+    # response
+    print(response.name)
 
 def menu():
     print("[1] Individual Checkin/ Checkout")
@@ -26,28 +35,32 @@ def menu():
 
 if __name__ == '__main__':
     logging.basicConfig()
-    run()
+    SetUsersData()
     menu()
 
     while True:
         try:
             option = int(input("Enter an option: "))
-            if option == 1:
-                print("Individual Checkin/ Checkout Called\n")
+            if option == "1":
+                check_in = input("Enter your location:")
+                print('You have Checked in at ' + check_in + ' at ' + str(datetime.now()))
+                
+                
 
-            elif option == 2:
+            elif option == "2":
                 print("Group Checkin/ Checkout Called\n")
+                print('You have Checked out at'+ check_in + ' at ' + str(datetime.now()))
 
-            elif option == 3:
+            elif option == "3":
                 print("Add Family Members into Group Called\n")
 
-            elif option == 4:
+            elif option == "4":
                 print("View History Called\n")
 
-            elif option == 5:
+            elif option == "5":
                 print("Declare Covid Clusters Called\n")
 
-            elif option == 0:
+            elif option == "0":
                 print("End Program\n")
                 exit()
             
