@@ -31,11 +31,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     """
     def check_out(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        if (self.db.data.nric == request.nric & self.db.data.checkOutDateTime == ""):
-            self.db.addDetails({"checkOutDateTime": checkout_time})
-            return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out Successful at " + checkout_time)
-        else: 
-            return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out was done")
+        self.db.updateDetails(request.nric, checkout_time)
+        return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out Successful at " + checkout_time)
     
 
     """
@@ -58,30 +55,13 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (2) Generate checkout time
         (3) Store data into Json file
     """
+
     def check_out_grp(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        if (self.db.data.nric == request.nric & self.db.data.checkOutDateTime == ""):
-            self.db.addDetails({"checkOutDateTime": checkout_time})
-            return Tracetogether_pb2.CheckOut_Reply(message= "Group Check-Out Successful at " + checkout_time)
-        else: 
-            return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out was done")
-        """
-        for ic in request.nric:
-            self.db.updateData(ic, request.check_out_time)
-            print(ic)
-        return Tracetogether_pb2.Grp_Check_Out_Reply(message=" GroupCheck Out Successful")
-        """
-
-
-
-
-
-
-
-
-
-
-
+        for nric in request.nric:
+            self.db.updateDetails(nric, checkout_time)
+            print(nric[::])
+        return Tracetogether_pb2.CheckOut_Grp_Reply(message=" GroupCheck Out Successful")
     """
         Function to obtain the history:
         (1) Tally NRIC
