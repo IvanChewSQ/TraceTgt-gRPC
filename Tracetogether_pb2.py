@@ -14,119 +14,103 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\x12\rTracetogether\"Q\n\x10\x43heck_in_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\x12\x0f\n\x07\x63heckin\x18\x04 \x01(\t\"!\n\x0e\x43heck_In_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"3\n\x11\x43heck_out_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\x12\x10\n\x08\x63heckout\x18\x02 \x01(\t\"\"\n\x0f\x43heck_Out_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"U\n\x14\x43heck_in_grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\x12\x0f\n\x07\x63heckin\x18\x04 \x01(\t\"%\n\x12Grp_Check_In_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"7\n\x15\x43heck_out_grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\x12\x10\n\x08\x63heckout\x18\x02 \x01(\t\"&\n\x13Grp_Check_Out_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x13Get_history_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"\"\n\rHistory_Reply\x12\x11\n\tlocations\x18\x01 \x03(\t\"\x1d\n\rLocationCheck\x12\x0c\n\x04nric\x18\x01 \x01(\t\"\"\n\x0eLocation_Reply\x12\x10\n\x08Location\x18\x01 \x01(\t\"8\n\x12\x46lag_cases_Request\x12\x10\n\x08location\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x02 \x01(\t\"\x1d\n\nFlag_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t2\x86\x04\n\rTracetogether\x12L\n\x08\x63heck_in\x12\x1f.Tracetogether.Check_in_Request\x1a\x1d.Tracetogether.Check_In_Reply\"\x00\x12O\n\tcheck_out\x12 .Tracetogether.Check_out_Request\x1a\x1e.Tracetogether.Check_Out_Reply\"\x00\x12X\n\x0c\x63heck_in_grp\x12#.Tracetogether.Check_in_grp_Request\x1a!.Tracetogether.Grp_Check_In_Reply\"\x00\x12[\n\rcheck_out_grp\x12$.Tracetogether.Check_out_grp_Request\x1a\".Tracetogether.Grp_Check_Out_Reply\"\x00\x12Q\n\x0bget_history\x12\".Tracetogether.Get_history_Request\x1a\x1c.Tracetogether.History_Reply\"\x00\x12L\n\nflag_cases\x12!.Tracetogether.Flag_cases_Request\x1a\x19.Tracetogether.Flag_Reply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\"?\n\x0f\x43heckIn_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rCheckIn_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x10\x43heckOut_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"!\n\x0e\x43heckOut_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"C\n\x13\x43heckIn_Grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\"$\n\x11\x43heckIn_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"$\n\x14\x43heckOut_Grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\"%\n\x12\x43heckOut_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0fHistory_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"\"\n\rHistory_Reply\x12\x11\n\tlocations\x18\x01 \x03(\t\"2\n\x0c\x46lag_Request\x12\x10\n\x08location\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x02 \x01(\t\"\x1d\n\nFlag_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t2\xcc\x02\n\rTracetogether\x12.\n\x08\x63heck_in\x12\x10.CheckIn_Request\x1a\x0e.CheckIn_Reply\"\x00\x12\x31\n\tcheck_out\x12\x11.CheckOut_Request\x1a\x0f.CheckOut_Reply\"\x00\x12:\n\x0c\x63heck_in_grp\x12\x14.CheckIn_Grp_Request\x1a\x12.CheckIn_Grp_Reply\"\x00\x12=\n\rcheck_out_grp\x12\x15.CheckOut_Grp_Request\x1a\x13.CheckOut_Grp_Reply\"\x00\x12\x31\n\x0bget_history\x12\x10.History_Request\x1a\x0e.History_Reply\"\x00\x12*\n\nflag_cases\x12\r.Flag_Request\x1a\x0b.Flag_Reply\"\x00\x62\x06proto3')
 
 
 
-_CHECK_IN_REQUEST = DESCRIPTOR.message_types_by_name['Check_in_Request']
-_CHECK_IN_REPLY = DESCRIPTOR.message_types_by_name['Check_In_Reply']
-_CHECK_OUT_REQUEST = DESCRIPTOR.message_types_by_name['Check_out_Request']
-_CHECK_OUT_REPLY = DESCRIPTOR.message_types_by_name['Check_Out_Reply']
-_CHECK_IN_GRP_REQUEST = DESCRIPTOR.message_types_by_name['Check_in_grp_Request']
-_GRP_CHECK_IN_REPLY = DESCRIPTOR.message_types_by_name['Grp_Check_In_Reply']
-_CHECK_OUT_GRP_REQUEST = DESCRIPTOR.message_types_by_name['Check_out_grp_Request']
-_GRP_CHECK_OUT_REPLY = DESCRIPTOR.message_types_by_name['Grp_Check_Out_Reply']
-_GET_HISTORY_REQUEST = DESCRIPTOR.message_types_by_name['Get_history_Request']
+_CHECKIN_REQUEST = DESCRIPTOR.message_types_by_name['CheckIn_Request']
+_CHECKIN_REPLY = DESCRIPTOR.message_types_by_name['CheckIn_Reply']
+_CHECKOUT_REQUEST = DESCRIPTOR.message_types_by_name['CheckOut_Request']
+_CHECKOUT_REPLY = DESCRIPTOR.message_types_by_name['CheckOut_Reply']
+_CHECKIN_GRP_REQUEST = DESCRIPTOR.message_types_by_name['CheckIn_Grp_Request']
+_CHECKIN_GRP_REPLY = DESCRIPTOR.message_types_by_name['CheckIn_Grp_Reply']
+_CHECKOUT_GRP_REQUEST = DESCRIPTOR.message_types_by_name['CheckOut_Grp_Request']
+_CHECKOUT_GRP_REPLY = DESCRIPTOR.message_types_by_name['CheckOut_Grp_Reply']
+_HISTORY_REQUEST = DESCRIPTOR.message_types_by_name['History_Request']
 _HISTORY_REPLY = DESCRIPTOR.message_types_by_name['History_Reply']
-_LOCATIONCHECK = DESCRIPTOR.message_types_by_name['LocationCheck']
-_LOCATION_REPLY = DESCRIPTOR.message_types_by_name['Location_Reply']
-_FLAG_CASES_REQUEST = DESCRIPTOR.message_types_by_name['Flag_cases_Request']
+_FLAG_REQUEST = DESCRIPTOR.message_types_by_name['Flag_Request']
 _FLAG_REPLY = DESCRIPTOR.message_types_by_name['Flag_Reply']
-Check_in_Request = _reflection.GeneratedProtocolMessageType('Check_in_Request', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_IN_REQUEST,
+CheckIn_Request = _reflection.GeneratedProtocolMessageType('CheckIn_Request', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKIN_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_in_Request)
+  # @@protoc_insertion_point(class_scope:CheckIn_Request)
   })
-_sym_db.RegisterMessage(Check_in_Request)
+_sym_db.RegisterMessage(CheckIn_Request)
 
-Check_In_Reply = _reflection.GeneratedProtocolMessageType('Check_In_Reply', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_IN_REPLY,
+CheckIn_Reply = _reflection.GeneratedProtocolMessageType('CheckIn_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKIN_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_In_Reply)
+  # @@protoc_insertion_point(class_scope:CheckIn_Reply)
   })
-_sym_db.RegisterMessage(Check_In_Reply)
+_sym_db.RegisterMessage(CheckIn_Reply)
 
-Check_out_Request = _reflection.GeneratedProtocolMessageType('Check_out_Request', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_OUT_REQUEST,
+CheckOut_Request = _reflection.GeneratedProtocolMessageType('CheckOut_Request', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKOUT_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_out_Request)
+  # @@protoc_insertion_point(class_scope:CheckOut_Request)
   })
-_sym_db.RegisterMessage(Check_out_Request)
+_sym_db.RegisterMessage(CheckOut_Request)
 
-Check_Out_Reply = _reflection.GeneratedProtocolMessageType('Check_Out_Reply', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_OUT_REPLY,
+CheckOut_Reply = _reflection.GeneratedProtocolMessageType('CheckOut_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKOUT_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_Out_Reply)
+  # @@protoc_insertion_point(class_scope:CheckOut_Reply)
   })
-_sym_db.RegisterMessage(Check_Out_Reply)
+_sym_db.RegisterMessage(CheckOut_Reply)
 
-Check_in_grp_Request = _reflection.GeneratedProtocolMessageType('Check_in_grp_Request', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_IN_GRP_REQUEST,
+CheckIn_Grp_Request = _reflection.GeneratedProtocolMessageType('CheckIn_Grp_Request', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKIN_GRP_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_in_grp_Request)
+  # @@protoc_insertion_point(class_scope:CheckIn_Grp_Request)
   })
-_sym_db.RegisterMessage(Check_in_grp_Request)
+_sym_db.RegisterMessage(CheckIn_Grp_Request)
 
-Grp_Check_In_Reply = _reflection.GeneratedProtocolMessageType('Grp_Check_In_Reply', (_message.Message,), {
-  'DESCRIPTOR' : _GRP_CHECK_IN_REPLY,
+CheckIn_Grp_Reply = _reflection.GeneratedProtocolMessageType('CheckIn_Grp_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKIN_GRP_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Grp_Check_In_Reply)
+  # @@protoc_insertion_point(class_scope:CheckIn_Grp_Reply)
   })
-_sym_db.RegisterMessage(Grp_Check_In_Reply)
+_sym_db.RegisterMessage(CheckIn_Grp_Reply)
 
-Check_out_grp_Request = _reflection.GeneratedProtocolMessageType('Check_out_grp_Request', (_message.Message,), {
-  'DESCRIPTOR' : _CHECK_OUT_GRP_REQUEST,
+CheckOut_Grp_Request = _reflection.GeneratedProtocolMessageType('CheckOut_Grp_Request', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKOUT_GRP_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Check_out_grp_Request)
+  # @@protoc_insertion_point(class_scope:CheckOut_Grp_Request)
   })
-_sym_db.RegisterMessage(Check_out_grp_Request)
+_sym_db.RegisterMessage(CheckOut_Grp_Request)
 
-Grp_Check_Out_Reply = _reflection.GeneratedProtocolMessageType('Grp_Check_Out_Reply', (_message.Message,), {
-  'DESCRIPTOR' : _GRP_CHECK_OUT_REPLY,
+CheckOut_Grp_Reply = _reflection.GeneratedProtocolMessageType('CheckOut_Grp_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKOUT_GRP_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Grp_Check_Out_Reply)
+  # @@protoc_insertion_point(class_scope:CheckOut_Grp_Reply)
   })
-_sym_db.RegisterMessage(Grp_Check_Out_Reply)
+_sym_db.RegisterMessage(CheckOut_Grp_Reply)
 
-Get_history_Request = _reflection.GeneratedProtocolMessageType('Get_history_Request', (_message.Message,), {
-  'DESCRIPTOR' : _GET_HISTORY_REQUEST,
+History_Request = _reflection.GeneratedProtocolMessageType('History_Request', (_message.Message,), {
+  'DESCRIPTOR' : _HISTORY_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Get_history_Request)
+  # @@protoc_insertion_point(class_scope:History_Request)
   })
-_sym_db.RegisterMessage(Get_history_Request)
+_sym_db.RegisterMessage(History_Request)
 
 History_Reply = _reflection.GeneratedProtocolMessageType('History_Reply', (_message.Message,), {
   'DESCRIPTOR' : _HISTORY_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.History_Reply)
+  # @@protoc_insertion_point(class_scope:History_Reply)
   })
 _sym_db.RegisterMessage(History_Reply)
 
-LocationCheck = _reflection.GeneratedProtocolMessageType('LocationCheck', (_message.Message,), {
-  'DESCRIPTOR' : _LOCATIONCHECK,
+Flag_Request = _reflection.GeneratedProtocolMessageType('Flag_Request', (_message.Message,), {
+  'DESCRIPTOR' : _FLAG_REQUEST,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.LocationCheck)
+  # @@protoc_insertion_point(class_scope:Flag_Request)
   })
-_sym_db.RegisterMessage(LocationCheck)
-
-Location_Reply = _reflection.GeneratedProtocolMessageType('Location_Reply', (_message.Message,), {
-  'DESCRIPTOR' : _LOCATION_REPLY,
-  '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Location_Reply)
-  })
-_sym_db.RegisterMessage(Location_Reply)
-
-Flag_cases_Request = _reflection.GeneratedProtocolMessageType('Flag_cases_Request', (_message.Message,), {
-  'DESCRIPTOR' : _FLAG_CASES_REQUEST,
-  '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Flag_cases_Request)
-  })
-_sym_db.RegisterMessage(Flag_cases_Request)
+_sym_db.RegisterMessage(Flag_Request)
 
 Flag_Reply = _reflection.GeneratedProtocolMessageType('Flag_Reply', (_message.Message,), {
   'DESCRIPTOR' : _FLAG_REPLY,
   '__module__' : 'Tracetogether_pb2'
-  # @@protoc_insertion_point(class_scope:Tracetogether.Flag_Reply)
+  # @@protoc_insertion_point(class_scope:Flag_Reply)
   })
 _sym_db.RegisterMessage(Flag_Reply)
 
@@ -134,34 +118,30 @@ _TRACETOGETHER = DESCRIPTOR.services_by_name['Tracetogether']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _CHECK_IN_REQUEST._serialized_start=38
-  _CHECK_IN_REQUEST._serialized_end=119
-  _CHECK_IN_REPLY._serialized_start=121
-  _CHECK_IN_REPLY._serialized_end=154
-  _CHECK_OUT_REQUEST._serialized_start=156
-  _CHECK_OUT_REQUEST._serialized_end=207
-  _CHECK_OUT_REPLY._serialized_start=209
-  _CHECK_OUT_REPLY._serialized_end=243
-  _CHECK_IN_GRP_REQUEST._serialized_start=245
-  _CHECK_IN_GRP_REQUEST._serialized_end=330
-  _GRP_CHECK_IN_REPLY._serialized_start=332
-  _GRP_CHECK_IN_REPLY._serialized_end=369
-  _CHECK_OUT_GRP_REQUEST._serialized_start=371
-  _CHECK_OUT_GRP_REQUEST._serialized_end=426
-  _GRP_CHECK_OUT_REPLY._serialized_start=428
-  _GRP_CHECK_OUT_REPLY._serialized_end=466
-  _GET_HISTORY_REQUEST._serialized_start=468
-  _GET_HISTORY_REQUEST._serialized_end=503
-  _HISTORY_REPLY._serialized_start=505
-  _HISTORY_REPLY._serialized_end=539
-  _LOCATIONCHECK._serialized_start=541
-  _LOCATIONCHECK._serialized_end=570
-  _LOCATION_REPLY._serialized_start=572
-  _LOCATION_REPLY._serialized_end=606
-  _FLAG_CASES_REQUEST._serialized_start=608
-  _FLAG_CASES_REQUEST._serialized_end=664
-  _FLAG_REPLY._serialized_start=666
-  _FLAG_REPLY._serialized_end=695
-  _TRACETOGETHER._serialized_start=698
-  _TRACETOGETHER._serialized_end=1216
+  _CHECKIN_REQUEST._serialized_start=23
+  _CHECKIN_REQUEST._serialized_end=86
+  _CHECKIN_REPLY._serialized_start=88
+  _CHECKIN_REPLY._serialized_end=120
+  _CHECKOUT_REQUEST._serialized_start=122
+  _CHECKOUT_REQUEST._serialized_end=154
+  _CHECKOUT_REPLY._serialized_start=156
+  _CHECKOUT_REPLY._serialized_end=189
+  _CHECKIN_GRP_REQUEST._serialized_start=191
+  _CHECKIN_GRP_REQUEST._serialized_end=258
+  _CHECKIN_GRP_REPLY._serialized_start=260
+  _CHECKIN_GRP_REPLY._serialized_end=296
+  _CHECKOUT_GRP_REQUEST._serialized_start=298
+  _CHECKOUT_GRP_REQUEST._serialized_end=334
+  _CHECKOUT_GRP_REPLY._serialized_start=336
+  _CHECKOUT_GRP_REPLY._serialized_end=373
+  _HISTORY_REQUEST._serialized_start=375
+  _HISTORY_REQUEST._serialized_end=406
+  _HISTORY_REPLY._serialized_start=408
+  _HISTORY_REPLY._serialized_end=442
+  _FLAG_REQUEST._serialized_start=444
+  _FLAG_REQUEST._serialized_end=494
+  _FLAG_REPLY._serialized_start=496
+  _FLAG_REPLY._serialized_end=525
+  _TRACETOGETHER._serialized_start=528
+  _TRACETOGETHER._serialized_end=860
 # @@protoc_insertion_point(module_scope)

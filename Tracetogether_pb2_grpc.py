@@ -15,33 +15,33 @@ class TracetogetherStub(object):
             channel: A grpc.Channel.
         """
         self.check_in = channel.unary_unary(
-                '/Tracetogether.Tracetogether/check_in',
-                request_serializer=Tracetogether__pb2.Check_in_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Check_In_Reply.FromString,
+                '/Tracetogether/check_in',
+                request_serializer=Tracetogether__pb2.CheckIn_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.CheckIn_Reply.FromString,
                 )
         self.check_out = channel.unary_unary(
-                '/Tracetogether.Tracetogether/check_out',
-                request_serializer=Tracetogether__pb2.Check_out_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Check_Out_Reply.FromString,
+                '/Tracetogether/check_out',
+                request_serializer=Tracetogether__pb2.CheckOut_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.CheckOut_Reply.FromString,
                 )
         self.check_in_grp = channel.unary_unary(
-                '/Tracetogether.Tracetogether/check_in_grp',
-                request_serializer=Tracetogether__pb2.Check_in_grp_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Grp_Check_In_Reply.FromString,
+                '/Tracetogether/check_in_grp',
+                request_serializer=Tracetogether__pb2.CheckIn_Grp_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.CheckIn_Grp_Reply.FromString,
                 )
         self.check_out_grp = channel.unary_unary(
-                '/Tracetogether.Tracetogether/check_out_grp',
-                request_serializer=Tracetogether__pb2.Check_out_grp_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Grp_Check_Out_Reply.FromString,
+                '/Tracetogether/check_out_grp',
+                request_serializer=Tracetogether__pb2.CheckOut_Grp_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.CheckOut_Grp_Reply.FromString,
                 )
         self.get_history = channel.unary_unary(
-                '/Tracetogether.Tracetogether/get_history',
-                request_serializer=Tracetogether__pb2.Get_history_Request.SerializeToString,
+                '/Tracetogether/get_history',
+                request_serializer=Tracetogether__pb2.History_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.History_Reply.FromString,
                 )
         self.flag_cases = channel.unary_unary(
-                '/Tracetogether.Tracetogether/flag_cases',
-                request_serializer=Tracetogether__pb2.Flag_cases_Request.SerializeToString,
+                '/Tracetogether/flag_cases',
+                request_serializer=Tracetogether__pb2.Flag_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.Flag_Reply.FromString,
                 )
 
@@ -90,37 +90,37 @@ def add_TracetogetherServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'check_in': grpc.unary_unary_rpc_method_handler(
                     servicer.check_in,
-                    request_deserializer=Tracetogether__pb2.Check_in_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Check_In_Reply.SerializeToString,
+                    request_deserializer=Tracetogether__pb2.CheckIn_Request.FromString,
+                    response_serializer=Tracetogether__pb2.CheckIn_Reply.SerializeToString,
             ),
             'check_out': grpc.unary_unary_rpc_method_handler(
                     servicer.check_out,
-                    request_deserializer=Tracetogether__pb2.Check_out_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Check_Out_Reply.SerializeToString,
+                    request_deserializer=Tracetogether__pb2.CheckOut_Request.FromString,
+                    response_serializer=Tracetogether__pb2.CheckOut_Reply.SerializeToString,
             ),
             'check_in_grp': grpc.unary_unary_rpc_method_handler(
                     servicer.check_in_grp,
-                    request_deserializer=Tracetogether__pb2.Check_in_grp_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Grp_Check_In_Reply.SerializeToString,
+                    request_deserializer=Tracetogether__pb2.CheckIn_Grp_Request.FromString,
+                    response_serializer=Tracetogether__pb2.CheckIn_Grp_Reply.SerializeToString,
             ),
             'check_out_grp': grpc.unary_unary_rpc_method_handler(
                     servicer.check_out_grp,
-                    request_deserializer=Tracetogether__pb2.Check_out_grp_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Grp_Check_Out_Reply.SerializeToString,
+                    request_deserializer=Tracetogether__pb2.CheckOut_Grp_Request.FromString,
+                    response_serializer=Tracetogether__pb2.CheckOut_Grp_Reply.SerializeToString,
             ),
             'get_history': grpc.unary_unary_rpc_method_handler(
                     servicer.get_history,
-                    request_deserializer=Tracetogether__pb2.Get_history_Request.FromString,
+                    request_deserializer=Tracetogether__pb2.History_Request.FromString,
                     response_serializer=Tracetogether__pb2.History_Reply.SerializeToString,
             ),
             'flag_cases': grpc.unary_unary_rpc_method_handler(
                     servicer.flag_cases,
-                    request_deserializer=Tracetogether__pb2.Flag_cases_Request.FromString,
+                    request_deserializer=Tracetogether__pb2.Flag_Request.FromString,
                     response_serializer=Tracetogether__pb2.Flag_Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'Tracetogether.Tracetogether', rpc_method_handlers)
+            'Tracetogether', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -139,9 +139,9 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/check_in',
-            Tracetogether__pb2.Check_in_Request.SerializeToString,
-            Tracetogether__pb2.Check_In_Reply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/check_in',
+            Tracetogether__pb2.CheckIn_Request.SerializeToString,
+            Tracetogether__pb2.CheckIn_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -156,9 +156,9 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/check_out',
-            Tracetogether__pb2.Check_out_Request.SerializeToString,
-            Tracetogether__pb2.Check_Out_Reply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/check_out',
+            Tracetogether__pb2.CheckOut_Request.SerializeToString,
+            Tracetogether__pb2.CheckOut_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -173,9 +173,9 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/check_in_grp',
-            Tracetogether__pb2.Check_in_grp_Request.SerializeToString,
-            Tracetogether__pb2.Grp_Check_In_Reply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/check_in_grp',
+            Tracetogether__pb2.CheckIn_Grp_Request.SerializeToString,
+            Tracetogether__pb2.CheckIn_Grp_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -190,9 +190,9 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/check_out_grp',
-            Tracetogether__pb2.Check_out_grp_Request.SerializeToString,
-            Tracetogether__pb2.Grp_Check_Out_Reply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/check_out_grp',
+            Tracetogether__pb2.CheckOut_Grp_Request.SerializeToString,
+            Tracetogether__pb2.CheckOut_Grp_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -207,8 +207,8 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/get_history',
-            Tracetogether__pb2.Get_history_Request.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/get_history',
+            Tracetogether__pb2.History_Request.SerializeToString,
             Tracetogether__pb2.History_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -224,8 +224,8 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether.Tracetogether/flag_cases',
-            Tracetogether__pb2.Flag_cases_Request.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/flag_cases',
+            Tracetogether__pb2.Flag_Request.SerializeToString,
             Tracetogether__pb2.Flag_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

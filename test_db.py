@@ -11,14 +11,15 @@ class Database():
 
     '''Function to add new SafeEntry data into datas.json
     Args: user's name, nric, visiting location and check in datetime'''
-    def addData(self, name, nric, location, dateTime):
+    def addData(self, name, nric, location, checkin_time, checkout_time):
         datas = {
             nric: [
                 {
+                    "nric": nric,
                     "name": name,
                     "location": location,
-                    "checkInDateTime": dateTime,
-                    "checkOutDateTime": ""
+                    "checkInDateTime": checkin_time,
+                    "checkOutDateTime": checkout_time
                 }
             ]
         }
