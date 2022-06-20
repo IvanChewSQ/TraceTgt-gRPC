@@ -55,12 +55,20 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (2) Generate checkout time
         (3) Store data into Json file
     """
-
     def check_out_grp(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         for nric in request.nric:
             self.db.updateDetails(nric, checkout_time)
         return Tracetogether_pb2.CheckOut_Grp_Reply(message=" GroupCheck Out Successful")
+    
+    
+    
+    
+    
+    
+    
+    
+    
     """
         Function to obtain the history:
         (1) Tally NRIC

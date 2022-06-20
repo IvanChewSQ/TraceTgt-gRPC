@@ -138,6 +138,14 @@ def check_out_grp(stub, nricList: list):
     print(response.message + "\n")
 
 
+
+
+
+
+
+
+
+
 '''
     Get History Functionality
     1. Request nric from users
@@ -150,14 +158,6 @@ def get_history(stub):
         (nric=nric))
     print(response.message + "\n")
 
-
-    
-    
-    
-    
-    
-    
-    
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
     print(response.message)
