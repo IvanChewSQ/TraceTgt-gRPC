@@ -2,8 +2,6 @@ from datetime import datetime
 from concurrent import futures
 from datetime import date, datetime
 import logging
-import time
-import json
 import grpc
 import test_db
 import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
@@ -21,8 +19,9 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     """
     def check_in(self, request, context):
         checkin_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.db.addData(request.name, request.nric, request.location, checkin_time)
+        self.db.addDetails(request.name, request.nric, request.location, checkin_time, "")
         return Tracetogether_pb2.CheckIn_Reply(message= "Check-In Successful at " + checkin_time)
+
 
     """
         Function to checkout:
@@ -33,23 +32,25 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     def check_out(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         if (self.db.data.nric == request.nric & self.db.data.checkOutDateTime == ""):
-            self.db.addData({"checkOutDateTime": checkout_time})
+            self.db.addDetails({"checkOutDateTime": checkout_time})
             return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out Successful at " + checkout_time)
         else: 
             return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out was done")
     
+
     """
         Function for group checkin:
         (1) Generate checkin time
         (2) Store list data into Json file
     """
     def check_in_grp(self, request, context):
-        index = 0
+        i = 0        
         checkin_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        for index in request.nric:
-            self.db.addData(request.nameList[index], request.nricList[index], request.location, checkin_time)
-            index += 1
+        for nric in request.nric:
+            self.db.addDetails(request.name[i], nric, request.location, checkin_time, "")
+            i += 1
         return Tracetogether_pb2.CheckIn_Grp_Reply(message= "Group Check-In Successful at " + checkin_time)
+
 
     """
         Function for group checkout:
@@ -60,7 +61,7 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     def check_out_grp(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         if (self.db.data.nric == request.nric & self.db.data.checkOutDateTime == ""):
-            self.db.addData({"checkOutDateTime": checkout_time})
+            self.db.addDetails({"checkOutDateTime": checkout_time})
             return Tracetogether_pb2.CheckOut_Reply(message= "Group Check-Out Successful at " + checkout_time)
         else: 
             return Tracetogether_pb2.CheckOut_Reply(message= "Check-Out was done")
@@ -72,10 +73,24 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         """
 
 
-        
+
+
+
+
+
+
+
+
+
+    """
+        Function to obtain the history:
+        (1) Tally NRIC
+        (2) Retrieve data from Json file
+    """
     def get_history(self, request, context):
-        locations = self.db.getVisited(request.nric)
-        return Tracetogether_pb2.History_Reply(locations=locations)
+        if (self.db.data.nric == request.nric):
+            # TODO to loop through the database and return all search
+            return Tracetogether_pb2.History_Reply(message = 'null')
 
     def Check_cases(self, request, context):
         return Tracetogether_pb2.Location_Reply(locationList=self.db.getCases(request.nric, self.db.getLocation()))

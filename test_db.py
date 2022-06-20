@@ -11,7 +11,7 @@ class Database():
 
     '''Function to add new SafeEntry data into datas.json
     Args: user's name, nric, visiting location and check in datetime'''
-    def addData(self, name, nric, location, checkin_time, checkout_time):
+    def addDetails(self, name, nric, location, checkin_time, checkout_time):
         datas = {
             nric: [
                 {
@@ -23,13 +23,25 @@ class Database():
                 }
             ]
         }
-
         self.data_file.update(datas)
-
         json_obj = json.dumps(self.data_file, indent=4)
-
         with open("data/entry.json", "w") as out:
             out.write(json_obj)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     '''Function to update existing SafeEntry entry with check out datetime
     Args: user's nric and check out datetime'''

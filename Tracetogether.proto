@@ -51,7 +51,7 @@ message History_Request {
 }
 
 message History_Reply {
-    repeated string locations = 1;
+    string message = 1;
 }
 
 message Flag_Request{

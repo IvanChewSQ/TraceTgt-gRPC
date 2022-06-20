@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\"?\n\x0f\x43heckIn_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rCheckIn_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x10\x43heckOut_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"!\n\x0e\x43heckOut_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"C\n\x13\x43heckIn_Grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\"$\n\x11\x43heckIn_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"$\n\x14\x43heckOut_Grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\"%\n\x12\x43heckOut_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0fHistory_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"\"\n\rHistory_Reply\x12\x11\n\tlocations\x18\x01 \x03(\t\"2\n\x0c\x46lag_Request\x12\x10\n\x08location\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x02 \x01(\t\"\x1d\n\nFlag_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t2\xcc\x02\n\rTracetogether\x12.\n\x08\x63heck_in\x12\x10.CheckIn_Request\x1a\x0e.CheckIn_Reply\"\x00\x12\x31\n\tcheck_out\x12\x11.CheckOut_Request\x1a\x0f.CheckOut_Reply\"\x00\x12:\n\x0c\x63heck_in_grp\x12\x14.CheckIn_Grp_Request\x1a\x12.CheckIn_Grp_Reply\"\x00\x12=\n\rcheck_out_grp\x12\x15.CheckOut_Grp_Request\x1a\x13.CheckOut_Grp_Reply\"\x00\x12\x31\n\x0bget_history\x12\x10.History_Request\x1a\x0e.History_Reply\"\x00\x12*\n\nflag_cases\x12\r.Flag_Request\x1a\x0b.Flag_Reply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\"?\n\x0f\x43heckIn_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rCheckIn_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x10\x43heckOut_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"!\n\x0e\x43heckOut_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"C\n\x13\x43heckIn_Grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\"$\n\x11\x43heckIn_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"$\n\x14\x43heckOut_Grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\"%\n\x12\x43heckOut_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0fHistory_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\" \n\rHistory_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"2\n\x0c\x46lag_Request\x12\x10\n\x08location\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61tetime\x18\x02 \x01(\t\"\x1d\n\nFlag_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t2\xcc\x02\n\rTracetogether\x12.\n\x08\x63heck_in\x12\x10.CheckIn_Request\x1a\x0e.CheckIn_Reply\"\x00\x12\x31\n\tcheck_out\x12\x11.CheckOut_Request\x1a\x0f.CheckOut_Reply\"\x00\x12:\n\x0c\x63heck_in_grp\x12\x14.CheckIn_Grp_Request\x1a\x12.CheckIn_Grp_Reply\"\x00\x12=\n\rcheck_out_grp\x12\x15.CheckOut_Grp_Request\x1a\x13.CheckOut_Grp_Reply\"\x00\x12\x31\n\x0bget_history\x12\x10.History_Request\x1a\x0e.History_Reply\"\x00\x12*\n\nflag_cases\x12\r.Flag_Request\x1a\x0b.Flag_Reply\"\x00\x62\x06proto3')
 
 
 
@@ -137,11 +137,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _HISTORY_REQUEST._serialized_start=375
   _HISTORY_REQUEST._serialized_end=406
   _HISTORY_REPLY._serialized_start=408
-  _HISTORY_REPLY._serialized_end=442
-  _FLAG_REQUEST._serialized_start=444
-  _FLAG_REQUEST._serialized_end=494
-  _FLAG_REPLY._serialized_start=496
-  _FLAG_REPLY._serialized_end=525
-  _TRACETOGETHER._serialized_start=528
-  _TRACETOGETHER._serialized_end=860
+  _HISTORY_REPLY._serialized_end=440
+  _FLAG_REQUEST._serialized_start=442
+  _FLAG_REQUEST._serialized_end=492
+  _FLAG_REPLY._serialized_start=494
+  _FLAG_REPLY._serialized_end=523
+  _TRACETOGETHER._serialized_start=526
+  _TRACETOGETHER._serialized_end=858
 # @@protoc_insertion_point(module_scope)
