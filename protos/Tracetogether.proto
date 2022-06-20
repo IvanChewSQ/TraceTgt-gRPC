@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package Tracetogether;
+
+service Tracetogether {
+    
+    rpc check_in (Check_in_Request) returns (Check_In_Reply) {}
+    rpc check_out (Check_out_Request) returns (Check_Out_Reply) {}
+    rpc check_in_grp (Check_in_grp_Request) returns (Grp_Check_In_Reply) {}
+    rpc check_out_grp (Check_out_grp_Request) returns (Grp_Check_Out_Reply) {}
+    rpc get_history (Get_history_Request) returns (History_Reply) {}
+    rpc flag_cases (Flag_cases_Request) returns (Flag_Reply) {}
+}
+
+message Check_in_Request {
+
+    string name = 1;
+    string nric = 2;
+    string location = 3;
+    string checkin = 4;
+}
+
+message Check_In_Reply {
+    string message = 1;
+}
+
+message Check_out_Request {
+    string nric = 1;
+    string checkout = 2;
+}
+
+message Check_Out_Reply {
+    string message = 1;
+}
+
+message Check_in_grp_Request {
+    repeated string name = 1;
+    repeated string nric = 2;
+    string location = 3;
+    string checkin = 4;
+}
+
+message Grp_Check_In_Reply {
+    string message = 1;
+}
+
+message Check_out_grp_Request {
+    repeated string nric = 1;
+    string checkout = 2;
+}
+
+message Grp_Check_Out_Reply {
+    string message = 1;
+}
+
+message Get_history_Request {
+    string nric = 1;
+}
+
+message History_Reply {
+    repeated string locations = 1;
+}
+
+message LocationCheck{
+    string nric = 1;
+}
+
+message Location_Reply{
+    string Location = 1;
+}
+
+message Flag_cases_Request{
+    string location = 1;
+    string datetime = 2;
+}
+
+message Flag_Reply{
+    string message = 1;
+}

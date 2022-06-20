@@ -1,12 +1,11 @@
 """The Python implementation of the GRPC helloworld.Greeter client."""
 
 from datetime import datetime
-from __future__ import print_function
 import logging
 from mimetypes import init
 import grpc
 
-import Tracetogether_pb2, Tracetogether_pb2_grpc
+import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
 
 def menu():
     print("[1] Individual Check In")
@@ -26,7 +25,7 @@ GRPC Client
 Check-in Functionality (Individual)
 '''
 def check_in(stub,name,nric,location,check_in):
-    response=stub.check_in(Tracetogether_pb2.Check_inRequest(name=name,nric=nric,location=location,check_in=check_in))
+    response=stub.check_in(Tracetogether_pb2.Check_in_Request(name=name,nric=nric,location=location,check_in=check_in))
     print(response.message)
 
 
@@ -34,7 +33,7 @@ def check_in(stub,name,nric,location,check_in):
 Check-out Functionality (Individual)
 '''
 def check_out(stub,name,nric,location,check_out):
-    response=stub.check_out(Tracetogether_pb2.Check_outRequest(name=name,nric=nric,location=location,check_out=check_out))
+    response=stub.check_out(Tracetogether_pb2.Check_out_Request(name=name,nric=nric,location=location,check_out=check_out))
     print(response.message)
 
 '''
@@ -51,7 +50,7 @@ def check_in_grp(stub, nameList: list, nricList: list, location, check_in):
         print("Number of names and nrics must be equal")
         return
 
-    response=stub.check_in_grp(Tracetogether_pb2.Check_in_grpRequest
+    response=stub.check_in_grp(Tracetogether_pb2.Check_in_grp_Request
     (name=nameList,nric=nricList,location=location,check_in=check_in))
     print(response.message)
 
@@ -70,7 +69,7 @@ def check_out_grp(stub, nameList: list, nricList: list, location, check_out):
         print("Number of names and nrics in the list must be equal")
         return
 
-    response=stub.check_out_grp(Tracetogether_pb2.Check_out_grpRequest
+    response=stub.check_out_grp(Tracetogether_pb2.Check_out_grp_Request
     (name=nameList,nric=nricList,location=location,check_out=check_out))
     print(response.message)
 
@@ -78,18 +77,18 @@ def check_out_grp(stub, nameList: list, nricList: list, location, check_out):
 Get History Functionality
 '''
 def get_history(stub,name,nric):
-    response=stub.get_history(Tracetogether_pb2.Get_historyRequest(name=name,nric=nric))
+    response=stub.get_history(Tracetogether_pb2.Get_history_Request(name=name,nric=nric))
     print(response.message)
 
     for location in response.location:
         print(location)
 
 def check_cases(stub,name,nric):
-    response=stub.check_cases(Tracetogether_pb2.Check_casesRequest(name=name,nric=nric))
+    response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
     print(response.message)
 
 def flag_cases(stub,name,nric):
-    response=stub.flag_cases(Tracetogether_pb2.Flag_casesRequest(name=name,nric=nric))
+    response=stub.flag_cases(Tracetogether_pb2.Flag_cases_Request(name=name,nric=nric))
     print(response.message)
 
 
@@ -162,3 +161,8 @@ if __name__ == '__main__':
                 exit()
             else:
                 print("Invalid input")
+
+        now = datetime.now()
+        flag_location(stub, "Tekong", now.strftime("%d/%m/%Y, %H:%M:%S"))
+
+
