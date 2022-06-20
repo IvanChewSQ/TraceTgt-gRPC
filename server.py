@@ -3,13 +3,13 @@ from concurrent import futures
 from datetime import date, datetime
 import logging
 import grpc
-import test_db
+import database
 import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
 
 class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     
     def __init__(self):
-        self.db = test_db.Database()
+        self.db = database.Database()
     
 
     """
@@ -61,23 +61,26 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
             self.db.updateDetails(nric, checkout_time)
         return Tracetogether_pb2.CheckOut_Grp_Reply(message=" GroupCheck Out Successful")
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     """
         Function to obtain the history:
         (1) Tally NRIC
         (2) Retrieve data from Json file
     """
     def get_history(self, request, context):
-        if (self.db.data.nric == request.nric):
-            # TODO to loop through the database and return all search
-            return Tracetogether_pb2.History_Reply(message = 'null')
+        self.db.getHistory(request.nric)
+        return Tracetogether_pb2.History_Reply(message = 'null')
+
+
+
+
+
+
+
+
+
+
+
 
     def Check_cases(self, request, context):
         return Tracetogether_pb2.Location_Reply(locationList=self.db.getCases(request.nric, self.db.getLocation()))

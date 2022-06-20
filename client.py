@@ -117,7 +117,7 @@ def check_in_grp(stub):
     3. Trigger gRPC to server for group checkout
     4. Display server output
 '''
-def check_out_grp(stub, nricList: list):
+def check_out_grp(stub):
     nricList = []
     while True:
         try: 
@@ -138,14 +138,6 @@ def check_out_grp(stub, nricList: list):
     print(response.message + "\n")
 
 
-
-
-
-
-
-
-
-
 '''
     Get History Functionality
     1. Request nric from users
@@ -157,6 +149,15 @@ def get_history(stub):
     response=stub.get_history(Tracetogether_pb2.Get_history_Request
         (nric=nric))
     print(response.message + "\n")
+
+
+
+
+
+
+
+
+
 
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))

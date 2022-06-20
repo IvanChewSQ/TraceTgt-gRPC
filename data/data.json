@@ -1,0 +1,29 @@
+{
+    "s9618780g": [
+        {
+            "nric": "s9618780g",
+            "name": "ivan",
+            "location": "bedok",
+            "checkInDateTime": "2022-06-21 02:08:06",
+            "checkOutDateTime": "2022-06-21 02:10:10"
+        }
+    ],
+    "t1234567s": [
+        {
+            "nric": "t1234567s",
+            "name": "jeremy",
+            "location": "bedok",
+            "checkInDateTime": "2022-06-21 02:08:06",
+            "checkOutDateTime": "2022-06-21 02:10:10"
+        }
+    ],
+    "t0098765a": [
+        {
+            "nric": "t0098765a",
+            "name": "dad",
+            "location": "bedok",
+            "checkInDateTime": "2022-06-21 02:08:06",
+            "checkOutDateTime": "2022-06-21 02:10:10"
+        }
+    ]
+}
