@@ -71,17 +71,6 @@ def check_in_grp(stub):
         (name = nameList, nric = nricList, location = location))
     print(response.message + "\n")
 
-
-
-
-
-
-
-
-
-
-
-
 '''
     Check-out Functionality (Group)
 '''
@@ -89,15 +78,15 @@ def check_out_grp(stub, nricList: list):
     response = stub.check_out_grp(Tracetogether_pb2.CheckOut_Grp_Request
     (nric = nricList))
     print(response.message + "\n")
-"""
-    if type(nameList) != list or type(nricList) != list:
-        print("Failure")
-        return
 
-    if len(nameList) != len(nricList):
-        print("Failure")
-        print("Number of names and nrics in the list must be equal")
-        return"""
+# if type(nameList) != list or type(nricList) != list:
+    #     print("Failure")
+    #     return
+
+    # if len(nameList) != len(nricList):
+    #     print("Failure")
+    #     print("Number of names and nrics in the list must be equal")
+    #     return"""
 
 
 '''
@@ -107,11 +96,6 @@ def get_history(stub, nric):
     response=stub.get_history(Tracetogether_pb2.Get_history_Request
         (nric=nric))
     print(response.message + "\n")
-
-
-
-
-
 
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
