@@ -25,5 +25,14 @@
             "checkInDateTime": "2022-06-21 02:08:06",
             "checkOutDateTime": "2022-06-21 02:10:10"
         }
+    ],
+    "s9618790g": [
+        {
+            "nric": "s9618790g",
+            "name": "ivan",
+            "location": "sit",
+            "checkInDateTime": "2022-06-21 02:33:18",
+            "checkOutDateTime": ""
+        }
     ]
 }
