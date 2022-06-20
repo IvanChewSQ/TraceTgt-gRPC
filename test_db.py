@@ -28,24 +28,9 @@ class Database():
         with open("data/entry.json", "w") as out:
             out.write(json_obj)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     '''Function to update existing SafeEntry entry with check out datetime
     Args: user's nric and check out datetime'''
-    def updateData(self, nric, dateTime):
+    def updateDetails(self, nric, dateTime):
         selected_user = self.data_file[nric]
 
         # TODO remember the last location checkedin to check out from
@@ -128,7 +113,6 @@ class Database():
                 locationDateTime = datetime.strftime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
                 LocationList.append(locations)
                 LocationList.append(locationDateTime)
-            # TODO add the nric and locations into a key value pair?
 
         print(LocationList)
         return LocationList

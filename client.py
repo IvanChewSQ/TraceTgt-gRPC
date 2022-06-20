@@ -109,7 +109,7 @@ def check_in_grp(stub):
         (name = nameList, nric = nricList, location = location))
     print(response.message + "\n")
 
-
+    
 '''
     (Group) Check-out Functionality 
     1. Request the number of family members
@@ -151,14 +151,13 @@ def get_history(stub):
     print(response.message + "\n")
 
 
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
     print(response.message)
