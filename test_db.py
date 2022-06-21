@@ -13,7 +13,7 @@ class Database():
     Args: user's name, nric, visiting location and check in datetime'''
     def addDetails(self, name, nric, location, checkin_time, checkout_time):
         datas = {
-            nric: [
+            "RANDOM_KEY": [
                 {
                     "nric": nric,
                     "name": name,
@@ -79,7 +79,7 @@ class Database():
     
     '''Function to get list of locations visited by user
     Returns list of locations'''
-    def getVisited(self, nric):
+    def getHistory(self, nric):
         locationList = []
         
         ## 2022/6/4

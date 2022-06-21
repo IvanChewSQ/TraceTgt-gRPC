@@ -93,7 +93,7 @@ def check_out_grp(stub, nricList: list):
     Get History Functionality
 '''
 def get_history(stub, nric):
-    response=stub.get_history(Tracetogether_pb2.Get_history_Request
+    response=stub.get_history(Tracetogether_pb2.History_Request
         (nric=nric))
     print(response.message + "\n")
 
