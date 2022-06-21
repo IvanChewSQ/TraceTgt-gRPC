@@ -15,7 +15,7 @@ nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
     Menu Selection for User
 """
 def menu():
-    print("[1] Individual Check In")
+    print("\n[1] Individual Check In")
     print("[2] Individual Check Out")
     print("[3] Group Check In")
     print("[4] Group Check Out")
