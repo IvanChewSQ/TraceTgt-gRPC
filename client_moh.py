@@ -8,8 +8,8 @@ import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Traceto
 """
     Regex for User Input
 """
-date_regex = re.compile(r"/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/")
-time_regex = re.compile(r"^[0-2][0-3]:[0-5][0-9]$")
+date_regex = re.compile(r"^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$")
+time_regex = re.compile(r"^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
 
 
 """
@@ -28,10 +28,13 @@ def menu():
 def checkDate():
     while True:
         date = input("Enter Date (YYYY-MM-DD): ")
-        if re.match(date_regex, date):
-            return date
+        if re.search(date_regex, date):
+            if date <= str(datetime.now()):
+                return date
+            else:
+                print("Invalid Date, please enter a date in the past")
         else: 
-            print("Invalid Date, please follow the format of (YYYY-MM-DD)")
+            print("Invalid Date format, please follow the format of (YYYY-MM-DD)")
 
 
 """
@@ -41,9 +44,12 @@ def checkTime():
     while True:
         time = input("Enter Time (HH:MM): ")
         if re.match(time_regex, time):
-            return time
+            if time <= str(datetime.now().strftime("%H:%M")):
+                return time
+            else:
+                print("Invalid Time, please enter a time in the past")
         else:
-             print("Invalid Time, please follow the format of (HH:MM)")
+             print("Invalid Time format, please follow the format of (HH:MM)")
 
 
 '''
@@ -81,7 +87,7 @@ if __name__ == '__main__':
                 else:
                     print("Invalid input, please try again\n")
                     continue
-                
+
             except ValueError:
                 print("Invalid Value, please try again\n")
                 continue

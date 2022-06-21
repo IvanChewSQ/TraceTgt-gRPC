@@ -14,7 +14,7 @@ class Database():
         Arguments: name, nric, location, checkin time, checkout time
     """
     def addDetails(self, name, nric, location, checkin_time, checkout_time):
-        datas = {
+        data = {
             nric: [
                 {
                     "nric": nric,
@@ -25,7 +25,7 @@ class Database():
                 }
             ]
         }
-        self.data_file.update(datas)
+        self.data_file.update(data)
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
@@ -57,14 +57,15 @@ class Database():
         Arguments: nric, checkout time
     """
     def covidLocation(self, location, date, time):
-        location = {
-            location: 
-            {
-                "Date": date,
-                "Time": time
-            }
+        cluster = {
+            location: [
+                {
+                    "Date": date,
+                    "Time": time
+                }
+            ]
         }
-        self.cluster_file.update(location)
+        self.cluster_file.update(cluster)
         json_obj = json.dumps(self.cluster_file, indent=4)
         with open("data/cluster.json", "w") as out:
             out.write(json_obj)
