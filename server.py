@@ -1,6 +1,7 @@
 from datetime import datetime
 from concurrent import futures
 from datetime import date, datetime
+from email import message
 import logging
 import grpc
 import database
@@ -68,8 +69,12 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (2) Retrieve data from Json file
     """
     def get_history(self, request, context):
-        self.db.getHistory(request.nric)
-        return Tracetogether_pb2.History_Reply(message = 'null')
+        get_history = str(self.db.getHistory(request.nric))
+        print(get_history)
+
+        return Tracetogether_pb2.History_Reply(message=get_history)
+         
+
 
 
     """

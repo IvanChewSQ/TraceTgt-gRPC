@@ -53,7 +53,7 @@ message History_Request {
 }
 
 message History_Reply {
-    string message = 1;
+    repeated string message = 1;
 }
 
 message Declare_Request {

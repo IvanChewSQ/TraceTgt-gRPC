@@ -146,7 +146,7 @@ def check_out_grp(stub):
 '''
 def get_history(stub):
     nric = checkNric()
-    response=stub.get_history(Tracetogether_pb2.Get_history_Request
+    response=stub.get_history(Tracetogether_pb2.History_Request
         (nric=nric))
     print(response.message + "\n")
 

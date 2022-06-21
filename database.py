@@ -34,8 +34,9 @@ class Database():
     '''Function to update existing SafeEntry entry with check out datetime
     Args: user's nric and check out datetime'''
     def updateDetails(self, nric, dateTime):
-        ID=0 + len(self.data_file)-1
-        for ID, value in self.data_file.items():
+
+        ID=0 + len(self.data_file)-1 # get last ID
+        for ID, value in self.data_file.items():    # loop through all the items in the dictionary
             for i in value:
                 if i["nric"] == nric:
                     i["checkOutDateTime"] = dateTime
@@ -44,25 +45,7 @@ class Database():
         with open("data/data.json", "w") as out:
             out.write(json_obj)
 
-<<<<<<< HEAD
     def addLocation(self, location, dateTime):
-=======
-    
-    """
-        Function to update users checkout time in json file
-        Arguments: nric, checkout time
-    """
-    def getHistory(self, nric, checkout_time):
-        #TODO get the list of History based on input NRIC
-        pass
-
-
-    """
-        Function to update users checkout time in json file
-        Arguments: nric, checkout time
-    """
-    def covidLocation(self, location, date, time):
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
         location = {
             location: 
             {
@@ -70,27 +53,13 @@ class Database():
                 "Time": time
             }
         }
-<<<<<<< HEAD
 
         self.location_file.update(location)
 
         json_obj = json.dumps(self.location_file, indent=4)
 
         with open("data/clusters.json", "w") as out:
-=======
-        self.cluster_file.update(location)
-        json_obj = json.dumps(self.cluster_file, indent=4)
-        with open("data/cluster.json", "w") as out:
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
             out.write(json_obj)
-
-
-
-
-
-
-
-
 
     '''Function to get list of locations visited by a Covid case within past 14 days
     Returns list of locations'''
@@ -115,15 +84,35 @@ class Database():
     '''Function to get list of locations visited by user
     Returns list of locations'''
     def getHistory(self, nric):
-        locationList = []
+        history_list = []    # list of dictionaries
+
+        for ID, value in self.data_file.items():   # loop through all the items in the dictionary
+            for i in value:
+                if i["nric"] == nric:
+                    history_list.append(i["location"])
+                    history_list.append(i["checkInDateTime"])
+                    history_list.append(i["checkOutDateTime"])
+         
+        history = [history_list[i:i + 3] for i in range(0, len(history_list), 3)]
+        return history
+
+    def getLocationHistory(self, location):
+
+        locationHistory = []
+
+        for ID, value in self.data_file.items():
+            for i in value:
+                if i["location"] == location:
+                    locationHistory.append(i)
+
+        return locationHistory
+
+
+
         
         ## 2022/6/4
-        now = datetime.now()
-        cur = now - timedelta(days=14)
-        
-        for i in self.data_file[nric]:
-            locationList.append(i["location"])
-        return locationList
+        #now = datetime.now()
+
 
     '''Function to check if user has visited an infected location within past 14 days
     Args: nric of user and list of infected locations
