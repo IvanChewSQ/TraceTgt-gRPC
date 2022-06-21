@@ -1,38 +1,42 @@
 {
-    "s9618780g": [
+    "0": [
         {
-            "nric": "s9618780g",
-            "name": "ivan",
-            "location": "bedok",
-            "checkInDateTime": "2022-06-21 02:08:06",
-            "checkOutDateTime": "2022-06-21 02:10:10"
+            "nric": "s9608507i",
+            "name": "s9608507i",
+            "location": "s9608507i",
+            "checkInDateTime": "2022-06-21 15:19:29",
+            "checkOutDateTime": "2022-06-21 15:33:16",
+            "ID": 0
         }
     ],
-    "t1234567s": [
+    "1": [
         {
-            "nric": "t1234567s",
-            "name": "jeremy",
-            "location": "bedok",
-            "checkInDateTime": "2022-06-21 02:08:06",
-            "checkOutDateTime": "2022-06-21 02:10:10"
+            "nric": "s9608507i",
+            "name": "s9608507i",
+            "location": "s9608507i",
+            "checkInDateTime": "2022-06-21 15:32:14",
+            "checkOutDateTime": "2022-06-21 15:33:16",
+            "ID": 1
         }
     ],
-    "t0098765a": [
+    "2": [
         {
-            "nric": "t0098765a",
-            "name": "dad",
+            "nric": "s9608507i",
+            "name": "s9608507i-1",
             "location": "bedok",
-            "checkInDateTime": "2022-06-21 02:08:06",
-            "checkOutDateTime": "2022-06-21 02:10:10"
+            "checkInDateTime": "2022-06-21 15:32:55",
+            "checkOutDateTime": "2022-06-21 15:33:16",
+            "ID": 2
         }
     ],
-    "s9618790g": [
+    "3": [
         {
-            "nric": "s9618790g",
-            "name": "ivan",
-            "location": "sit",
-            "checkInDateTime": "2022-06-21 02:33:18",
-            "checkOutDateTime": ""
+            "nric": "s9608507i",
+            "name": "s9608507i-2",
+            "location": "bedok",
+            "checkInDateTime": "2022-06-21 15:32:55",
+            "checkOutDateTime": "2022-06-21 15:33:16",
+            "ID": 3
         }
     ]
 }

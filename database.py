@@ -4,44 +4,58 @@ from datetime import timedelta, datetime
 
 class Database():
     
+    '''Read and open json file first for optimised performance'''
     def __init__(self):
         self.data_file = json.load(open("data/data.json", "r"))
-        self.cluster_file = json.load(open("data/cluster.json", "r"))
+        self.location_file = json.load(open("data/cluster.json", "r"))
 
-
-    """
-        Function to add users details into json file
-        Arguments: name, nric, location, checkin time, checkout time
-    """
+    '''Function to add new SafeEntry data into datas.json
+    Args: user's name, nric, visiting location and check in datetime'''
     def addDetails(self, name, nric, location, checkin_time, checkout_time):
+<<<<<<< HEAD
         data = {
             nric: [
+=======
+        ID=0 + len(self.data_file)
+        datas = {
+            ID: [
+>>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
                 {
                     "nric": nric,
                     "name": name,
                     "location": location,
                     "checkInDateTime": checkin_time,
-                    "checkOutDateTime": checkout_time
+                    "checkOutDateTime": checkout_time,
+                    "ID": ID
                 }
             ]
         }
+<<<<<<< HEAD
         self.data_file.update(data)
+=======
+
+        self.data_file.update(datas)
+>>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
 
+    '''Function to update existing SafeEntry entry with check out datetime
+    Args: user's nric and check out datetime'''
+    def updateDetails(self, nric, dateTime):
+        ID=0 + len(self.data_file)-1
+        for ID, value in self.data_file.items():
+            for i in value:
+                if i["nric"] == nric:
+                    i["checkOutDateTime"] = dateTime
 
-    """
-        Function to update users checkout time in json file
-        Arguments: nric, checkout time
-    """
-    def updateDetails(self, nric, checkout_time):
-        user = self.data_file[nric]
-        user[0]["checkOutDateTime"] = checkout_time
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
 
+<<<<<<< HEAD
+    def addLocation(self, location, dateTime):
+=======
     
     """
         Function to update users checkout time in json file
@@ -57,6 +71,7 @@ class Database():
         Arguments: nric, checkout time
     """
     def covidLocation(self, location, date, time):
+<<<<<<< HEAD
         cluster = {
             location: [
                 {
@@ -66,8 +81,28 @@ class Database():
             ]
         }
         self.cluster_file.update(cluster)
+=======
+>>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
+        location = {
+            location: 
+            {
+                "Date": date,
+                "Time": time
+            }
+        }
+<<<<<<< HEAD
+
+        self.location_file.update(location)
+
+        json_obj = json.dumps(self.location_file, indent=4)
+
+        with open("data/clusters.json", "w") as out:
+=======
+        self.cluster_file.update(location)
+>>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
         json_obj = json.dumps(self.cluster_file, indent=4)
         with open("data/cluster.json", "w") as out:
+>>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
             out.write(json_obj)
 
 
@@ -87,8 +122,8 @@ class Database():
         now = datetime.now()
         cur = now - timedelta(days=14)
 
-        for i in self.cluster_file:
-            locationDate = self.cluster_file[i]["Date"]
+        for i in self.location_file:
+            locationDate = self.location_file[i]["Date"]
             locationDate = datetime.strptime(locationDate, '%d/%m/%Y')
 
             if (locationDate > cur):
@@ -100,7 +135,7 @@ class Database():
     
     '''Function to get list of locations visited by user
     Returns list of locations'''
-    def getVisited(self, nric):
+    def getHistory(self, nric):
         locationList = []
         
         ## 2022/6/4
@@ -109,9 +144,6 @@ class Database():
         
         for i in self.data_file[nric]:
             locationList.append(i["location"])
-
-        print(locationList)
-
         return locationList
 
     '''Function to check if user has visited an infected location within past 14 days
@@ -138,7 +170,7 @@ class Database():
         print(LocationList)
         return LocationList
 
-    '''Reusable function to check if NRIC exists in data.json
+    '''Reusable function to check if NRIC exists in entry.json
     Returns true if so'''
     def nricExists(self, nric):
         return False
