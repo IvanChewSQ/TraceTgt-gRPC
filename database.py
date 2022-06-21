@@ -12,9 +12,8 @@ class Database():
     '''Function to add new SafeEntry data into datas.json
     Args: user's name, nric, visiting location and check in datetime'''
     def addDetails(self, name, nric, location, checkin_time, checkout_time):
-        ID=0 + len(self.data_file)
-        datas = {
-            ID: [
+        data = {
+            nric: [
                 {
                     "nric": nric,
                     "name": name,
@@ -25,8 +24,7 @@ class Database():
                 }
             ]
         }
-
-        self.data_file.update(datas)
+        self.data_file.update(data)
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
@@ -46,6 +44,37 @@ class Database():
             out.write(json_obj)
 
     def addLocation(self, location, dateTime):
+<<<<<<< HEAD
+=======
+=======
+    
+    """
+        Function to update users checkout time in json file
+        Arguments: nric, checkout time
+    """
+    def getHistory(self, nric, checkout_time):
+        #TODO get the list of History based on input NRIC
+        pass
+
+
+    """
+        Function to update users checkout time in json file
+        Arguments: nric, checkout time
+    """
+    def covidLocation(self, location, date, time):
+<<<<<<< HEAD
+        cluster = {
+            location: [
+                {
+                    "Date": date,
+                    "Time": time
+                }
+            ]
+        }
+        self.cluster_file.update(cluster)
+=======
+>>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
+>>>>>>> 2b945676edd3d3bd4cd6ae9d7d90a3297739e860
         location = {
             location: 
             {
@@ -59,6 +88,15 @@ class Database():
         json_obj = json.dumps(self.location_file, indent=4)
 
         with open("data/clusters.json", "w") as out:
+<<<<<<< HEAD
+=======
+=======
+        self.cluster_file.update(location)
+>>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
+        json_obj = json.dumps(self.cluster_file, indent=4)
+        with open("data/cluster.json", "w") as out:
+>>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
+>>>>>>> 2b945676edd3d3bd4cd6ae9d7d90a3297739e860
             out.write(json_obj)
 
     '''Function to get list of locations visited by a Covid case within past 14 days
