@@ -39,10 +39,10 @@ class TracetogetherStub(object):
                 request_serializer=Tracetogether__pb2.History_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.History_Reply.FromString,
                 )
-        self.flag_cases = channel.unary_unary(
-                '/Tracetogether/flag_cases',
-                request_serializer=Tracetogether__pb2.Flag_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Flag_Reply.FromString,
+        self.delcare_locations = channel.unary_unary(
+                '/Tracetogether/delcare_locations',
+                request_serializer=Tracetogether__pb2.Declare_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.Declare_Reply.FromString,
                 )
 
 
@@ -79,8 +79,9 @@ class TracetogetherServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def flag_cases(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def delcare_locations(self, request, context):
+        """gRPC for MOH Officers
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -113,10 +114,10 @@ def add_TracetogetherServicer_to_server(servicer, server):
                     request_deserializer=Tracetogether__pb2.History_Request.FromString,
                     response_serializer=Tracetogether__pb2.History_Reply.SerializeToString,
             ),
-            'flag_cases': grpc.unary_unary_rpc_method_handler(
-                    servicer.flag_cases,
-                    request_deserializer=Tracetogether__pb2.Flag_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Flag_Reply.SerializeToString,
+            'delcare_locations': grpc.unary_unary_rpc_method_handler(
+                    servicer.delcare_locations,
+                    request_deserializer=Tracetogether__pb2.Declare_Request.FromString,
+                    response_serializer=Tracetogether__pb2.Declare_Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -214,7 +215,7 @@ class Tracetogether(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def flag_cases(request,
+    def delcare_locations(request,
             target,
             options=(),
             channel_credentials=None,
@@ -224,8 +225,8 @@ class Tracetogether(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether/flag_cases',
-            Tracetogether__pb2.Flag_Request.SerializeToString,
-            Tracetogether__pb2.Flag_Reply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/delcare_locations',
+            Tracetogether__pb2.Declare_Request.SerializeToString,
+            Tracetogether__pb2.Declare_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

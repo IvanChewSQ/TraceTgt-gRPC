@@ -173,29 +173,32 @@ if __name__ == '__main__':
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = Tracetogether_pb2_grpc.TracetogetherStub(channel)
         while True:
-            menu()
-            choice = int(input("Enter an option: "))
+            try:
+                menu()
+                choice = int(input("Enter an option: "))
 
-            if choice == 1:
-                check_in(stub)
-            
-            elif choice == 2:
-                check_out(stub)
-            
-            elif choice == 3:
-                check_in_grp(stub)
-            
-            elif choice == 4:
-                check_out_grp(stub)
-            
-            elif choice == 5:
-                get_history(stub)
+                if choice == 1:
+                    check_in(stub)
+                
+                elif choice == 2:
+                    check_out(stub)
+                
+                elif choice == 3:
+                    check_in_grp(stub)
+                
+                elif choice == 4:
+                    check_out_grp(stub)
+                
+                elif choice == 5:
+                    get_history(stub)
 
-            elif choice == 0:
-                exit()
-            else:
-                print("Invalid input\n")
-
-
-
-
+                elif choice == 0:
+                    exit()
+                
+                else:
+                    print("Invalid input, please try again\n")
+                    continue
+                
+            except ValueError:
+                print("Invalid Value, please try again\n")
+                continue

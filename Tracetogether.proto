@@ -7,7 +7,9 @@ service Tracetogether {
     rpc check_in_grp (CheckIn_Grp_Request) returns (CheckIn_Grp_Reply) {}
     rpc check_out_grp (CheckOut_Grp_Request) returns (CheckOut_Grp_Reply) {}
     rpc get_history (History_Request) returns (History_Reply) {}
-    rpc flag_cases (Flag_Request) returns (Flag_Reply) {}
+
+    /* gRPC for MOH Officers*/
+    rpc delcare_locations (Declare_Request) returns (Declare_Reply) {}
 }
 
 message CheckIn_Request {
@@ -54,11 +56,12 @@ message History_Reply {
     string message = 1;
 }
 
-message Flag_Request{
-    string location = 1;
-    string datetime = 2;
+message Declare_Request {
+    string date = 1;
+    string time = 2;
+    string location = 3;
 }
 
-message Flag_Reply{
+message Declare_Reply {
     string message = 1;
 }
