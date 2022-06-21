@@ -73,7 +73,6 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         print(get_history)
 
         return Tracetogether_pb2.History_Reply(message=get_history)
-         
 
 
 
