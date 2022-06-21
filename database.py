@@ -44,16 +44,7 @@ class Database():
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
-<<<<<<< HEAD
 
-    def addLocation(self, location, dateTime):
-<<<<<<< HEAD
-=======
-=======
-    
-=======
-   
->>>>>>> 4c7cbccecf5095679921273a4786ac69d08b74d3
     """
         Function to update users checkout time in json file
         Arguments: nric, checkout time
@@ -77,12 +68,6 @@ class Database():
             ]
         }
         self.cluster_file.update(cluster)
-<<<<<<< HEAD
-=======
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
->>>>>>> 2b945676edd3d3bd4cd6ae9d7d90a3297739e860
-=======
->>>>>>> 4c7cbccecf5095679921273a4786ac69d08b74d3
         location = {
             location: 
             {
@@ -90,26 +75,10 @@ class Database():
                 "Time": time
             }
         }
-<<<<<<< HEAD
 
-        self.location_file.update(location)
-
-        json_obj = json.dumps(self.location_file, indent=4)
-
-        with open("data/clusters.json", "w") as out:
-<<<<<<< HEAD
-=======
-=======
-=======
->>>>>>> 4c7cbccecf5095679921273a4786ac69d08b74d3
         self.cluster_file.update(location)
         json_obj = json.dumps(self.cluster_file, indent=4)
         with open("data/cluster.json", "w") as out:
-<<<<<<< HEAD
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
->>>>>>> 2b945676edd3d3bd4cd6ae9d7d90a3297739e860
-=======
->>>>>>> 4c7cbccecf5095679921273a4786ac69d08b74d3
             out.write(json_obj)
 
     '''Function to get list of locations visited by a Covid case within past 14 days
