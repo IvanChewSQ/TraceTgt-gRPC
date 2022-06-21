@@ -12,14 +12,9 @@ class Database():
     '''Function to add new SafeEntry data into datas.json
     Args: user's name, nric, visiting location and check in datetime'''
     def addDetails(self, name, nric, location, checkin_time, checkout_time):
-<<<<<<< HEAD
-        data = {
-            nric: [
-=======
         ID=0 + len(self.data_file)
         datas = {
             ID: [
->>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
                 {
                     "nric": nric,
                     "name": name,
@@ -30,12 +25,8 @@ class Database():
                 }
             ]
         }
-<<<<<<< HEAD
-        self.data_file.update(data)
-=======
 
         self.data_file.update(datas)
->>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
@@ -52,11 +43,7 @@ class Database():
         json_obj = json.dumps(self.data_file, indent=4)
         with open("data/data.json", "w") as out:
             out.write(json_obj)
-
-<<<<<<< HEAD
-    def addLocation(self, location, dateTime):
-=======
-    
+   
     """
         Function to update users checkout time in json file
         Arguments: nric, checkout time
@@ -71,7 +58,6 @@ class Database():
         Arguments: nric, checkout time
     """
     def covidLocation(self, location, date, time):
-<<<<<<< HEAD
         cluster = {
             location: [
                 {
@@ -81,8 +67,6 @@ class Database():
             ]
         }
         self.cluster_file.update(cluster)
-=======
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
         location = {
             location: 
             {
@@ -90,19 +74,9 @@ class Database():
                 "Time": time
             }
         }
-<<<<<<< HEAD
-
-        self.location_file.update(location)
-
-        json_obj = json.dumps(self.location_file, indent=4)
-
-        with open("data/clusters.json", "w") as out:
-=======
         self.cluster_file.update(location)
->>>>>>> 72bf83c5ca6279effc6645dd57548ea00b563119
         json_obj = json.dumps(self.cluster_file, indent=4)
         with open("data/cluster.json", "w") as out:
->>>>>>> 328e224e59f952196fce6e960344663c0abdb42b
             out.write(json_obj)
 
 
