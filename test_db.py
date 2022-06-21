@@ -88,9 +88,6 @@ class Database():
         
         for i in self.data_file[nric]:
             locationList.append(i["location"])
-
-        print(locationList)
-
         return locationList
 
     '''Function to check if user has visited an infected location within past 14 days

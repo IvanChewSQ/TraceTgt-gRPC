@@ -2,7 +2,14 @@ from datetime import datetime
 import logging
 from mimetypes import init
 import grpc
+import re
 import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
+
+"""
+    Regex for User Input
+"""
+name_regex = re.compile(r"[A-Za-z]+")
+nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
 
 """
     Menu Selection for User
@@ -18,15 +25,39 @@ def menu():
     print("[0] Exit")
 
 
+"""
+    Function to get Name Input and check 
+"""
+def checkName():
+    while True:
+        name = input("\nEnter Name: ")
+        if re.match(name_regex, name):
+            return name
+        else: 
+            print("Invalid Name, please verify")
+
+
+"""
+    Function to get NRIC Input and check 
+"""
+def checkNric():
+    while True:
+        nric = input("Enter NRIC: ")
+        if re.match(nric_regex, nric):
+            return nric
+        else:
+            print("Invalid NRIC, please verify")
+
+
 '''
-    Check-in Functionality (Individual)
+    (Individual) Check-in Functionality 
     1. Request name, nric, location from users
     2. Trigger gRPC to server for checkin
     3. Display server output
 '''
 def check_in(stub):
-    name = input("\nEnter Name: ")
-    nric = input("Enter NRIC: ")
+    name = checkName()
+    nric = checkNric()
     location = input("Enter Location: ")
     response = stub.check_in(Tracetogether_pb2.CheckIn_Request
         (name = name, nric = nric, location = location))
@@ -34,35 +65,42 @@ def check_in(stub):
 
 
 '''
-    Check-out Functionality (Individual)
+    (Individual) Check-out Functionality 
     1. Request nric from users for search in database
     2. Trigger gRPC to server for checkout
     3. Display server output 
 '''
 def check_out(stub):
-    nric = input("\nEnter NRIC: ")
+    nric = checkNric()
     response = stub.check_out(Tracetogether_pb2.CheckOut_Request
         (nric = nric))
     print(response.message + "\n")
 
 
 '''
-    Check-in Functionality (Group)
+    (Group) Check-in Functionality 
     1. Request the number of family members
     2. Request all the name, nric and location from users
     3. Trigger gRPC to server for group checkin
-    3. Display server output
+    4. Display server output
 '''
 def check_in_grp(stub):
     nameList = []
     nricList = []
 
-    member = int(input("\nEnter number of family member (including yourself): "))
+    while True:
+        try: 
+            member = int(input("\nEnter number of family member (including yourself): "))
+        except ValueError:
+            print("Invalid Value, please try again")
+            continue
+        else:
+            break
     i = 1
     while (i <= member):
         print("\nDetails for member #", i)
-        name = input("Enter Name: ")
-        nric = input("Enter NRIC: ")
+        name = checkName()
+        nric = checkNric()
         nameList.append(name)
         nricList.append(nric)
         i+=1
@@ -71,31 +109,55 @@ def check_in_grp(stub):
         (name = nameList, nric = nricList, location = location))
     print(response.message + "\n")
 
+    
 '''
-    Check-out Functionality (Group)
+    (Group) Check-out Functionality 
+    1. Request the number of family members
+    2. Request all nric from users
+    3. Trigger gRPC to server for group checkout
+    4. Display server output
 '''
-def check_out_grp(stub, nricList: list):
+def check_out_grp(stub):
+    nricList = []
+    while True:
+        try: 
+            member = int(input("\nEnter number of family member (including yourself): "))
+        except ValueError:
+            print("Invalid Value, please try again")
+            continue
+        else:
+            break
+    i = 1
+    while (i <= member):
+        print("\nDetails for member #", i)
+        nric = checkNric()
+        nricList.append(nric)
+        i+=1
     response = stub.check_out_grp(Tracetogether_pb2.CheckOut_Grp_Request
-    (nric = nricList))
+        (nric = nricList))
     print(response.message + "\n")
-
-# if type(nameList) != list or type(nricList) != list:
-    #     print("Failure")
-    #     return
-
-    # if len(nameList) != len(nricList):
-    #     print("Failure")
-    #     print("Number of names and nrics in the list must be equal")
-    #     return"""
 
 
 '''
     Get History Functionality
+    1. Request nric from users
+    2. Trigger gRPC to retrieve all history record associated with the nric
+    3. Display output
 '''
-def get_history(stub, nric):
-    response=stub.get_history(Tracetogether_pb2.History_Request
+def get_history(stub):
+    nric = checkNric()
+    response=stub.get_history(Tracetogether_pb2.Get_history_Request
         (nric=nric))
     print(response.message + "\n")
+
+
+
+
+
+
+
+
+
 
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
@@ -104,11 +166,6 @@ def check_cases(stub,name,nric):
 def flag_cases(stub,name,nric):
     response=stub.flag_cases(Tracetogether_pb2.Flag_cases_Request(name=name,nric=nric))
     print(response.message)
-
-
-def get_time():
-    now=datetime.now()
-    return now.strftime("%d/%m/%Y %H:%M:%S")
 
 
 if __name__ == '__main__':
@@ -129,20 +186,10 @@ if __name__ == '__main__':
                 check_in_grp(stub)
             
             elif choice == 4:
-                nricList = []
-
-                member = int(input("\nEnter number of family member (including yourself): "))
-                i = 1
-                while (i <= member):
-                    print("\nDetails for member #",i)
-                    nric = input("Enter NRIC: ")
-                    nricList.append(nric)
-                    i+=1
-                check_out_grp(stub, nricList)
+                check_out_grp(stub)
             
             elif choice == 5:
-                nric = input("\nEnter NRIC: ")
-                get_history(stub, nric)
+                get_history(stub)
 
             elif choice == 0:
                 exit()
