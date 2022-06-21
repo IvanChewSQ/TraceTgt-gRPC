@@ -72,6 +72,19 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         return Tracetogether_pb2.History_Reply(message = 'null')
 
 
+    """
+        Function to declare covid location:
+        (1) Tally NRIC
+        (2) Retrieve data from Json file
+    """
+    def delcare_locations(self, request, context):
+        self.db.covidLocation(request.location, request.date, request.time)
+        
+        #TODO add in notification
+
+        return Tracetogether_pb2.Declare_Reply(message = "Location ("+ request.location +") declared as Covid-19 cluster")
+
+
 
 
 
@@ -84,14 +97,6 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     def Check_cases(self, request, context):
         return Tracetogether_pb2.Location_Reply(locationList=self.db.getCases(request.nric, self.db.getLocation()))
-
-    def Flag_cases(self, request, context):
-        self.db.addCase(request.location, request.datetime)
-        return Tracetogether_pb2.Flag_Reply(message="Flagged Case Successful")
-
-    def Flag_location(self, request, context):
-        self.db.addLocation(request.location, request.datetime)
-        return Tracetogether_pb2.Flag_Reply(message="Flagged Location Successful")
 
 def serve():
     listen_addr = '[::]:50051'
