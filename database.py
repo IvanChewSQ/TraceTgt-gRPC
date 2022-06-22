@@ -113,7 +113,8 @@ class Database():
                     history_list.append(i["checkInDateTime"])
                     history_list.append(i["checkOutDateTime"])
          
-        history = [history_list[i:i + 3] for i in range(0, len(history_list), 3)]
+        history = [history_list[i:i + 3] for i in range(0, len(history_list), 3)]   # create a list of lists in 3 entries
+
         return history
 
     def getLocationHistory(self, location):

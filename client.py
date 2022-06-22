@@ -147,17 +147,16 @@ def check_out_grp(stub):
 def get_history(stub):
     nric = checkNric()
     response=stub.get_history(Tracetogether_pb2.History_Request
-        (nric=nric))
-    print(response.message + "\n")
+        (nric=nric))  
 
+    history_list = ''   
 
+    for word in response.history:
+        history_list += str(word + "")
+    history_list = history_list[:-1]
+    history_list += '.'
 
-
-
-
-
-
-
+    print("Your history for the past 14 days: \n", history_list)
 
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))

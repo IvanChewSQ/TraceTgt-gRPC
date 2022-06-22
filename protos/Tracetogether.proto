@@ -2,11 +2,11 @@ syntax = "proto3";
 
 service Tracetogether {
     
-    rpc check_in (CheckIn_Request) returns (CheckIn_Reply) {}
-    rpc check_out (CheckOut_Request) returns (CheckOut_Reply) {}
+    rpc check_in (CheckIn_Request) returns (CheckIn_Reply) {} // Check in with the server
+    rpc check_out (CheckOut_Request) returns (CheckOut_Reply) {} // Check out with the server
     rpc check_in_grp (CheckIn_Grp_Request) returns (CheckIn_Grp_Reply) {}
     rpc check_out_grp (CheckOut_Grp_Request) returns (CheckOut_Grp_Reply) {}
-    rpc get_history (History_Request) returns (History_Reply) {}
+    rpc get_history (History_Request) returns (History_Reply) {} // Get the history of the user
 
     /* gRPC for MOH Officers*/
     rpc delcare_locations (Declare_Request) returns (Declare_Reply) {}
@@ -53,7 +53,7 @@ message History_Request {
 }
 
 message History_Reply {
-    repeated string message = 1;
+    repeated string history = 1;
 }
 
 message Declare_Request {

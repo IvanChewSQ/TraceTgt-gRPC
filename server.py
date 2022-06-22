@@ -70,10 +70,16 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     """
     def get_history(self, request, context):
         get_history = str(self.db.getHistory(request.nric))
-        print(get_history)
+        print(get_history[::])
 
-        return Tracetogether_pb2.History_Reply(message=get_history)
+        return Tracetogether_pb2.History_Reply(hist=get_history)
 
+    def flag_cases(self, request, context):
+        self.db.flagCases(request.nric, request.location)
+        return Tracetogether_pb2.Flag_Reply(message = "Case Flagged")
+        
+    def get_location(self, request, context):
+        return Tracetogether_pb2.Location_Reply(locationList=self.db.getLocation())
 
 
     """
