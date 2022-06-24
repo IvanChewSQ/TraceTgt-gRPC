@@ -114,9 +114,14 @@ class Database():
     """
     def remove_covidLocation(self, location):
         for ID, value in self.cluster_file.items():    # loop through all the items in the dictionary
-            for i in value:
-                if i["location"] == location:
-                    pass
+            for i in value: 
+                if i["location"] == location:   # if the location is found
+                    del self.cluster_file[ID]   # remove the location from the dictionary
+                    json_obj = json.dumps(self.cluster_file, indent=4)
+                    with open("data/cluster.json", "w") as out:
+                        out.write(json_obj)
+                    return True
+                    
 
         json_obj = json.dumps(self.cluster_file, indent=4)
         with open("data/cluster.json", "w") as out:
