@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\"?\n\x0f\x43heckIn_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rCheckIn_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x10\x43heckOut_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"!\n\x0e\x43heckOut_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"C\n\x13\x43heckIn_Grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\"$\n\x11\x43heckIn_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"$\n\x14\x43heckOut_Grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\"%\n\x12\x43heckOut_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0fHistory_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\" \n\rHistory_Reply\x12\x0f\n\x07history\x18\x01 \x03(\t\"?\n\x0f\x44\x65\x63lare_Request\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\x12\x0c\n\x04time\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rDeclare_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t2\xd9\x02\n\rTracetogether\x12.\n\x08\x63heck_in\x12\x10.CheckIn_Request\x1a\x0e.CheckIn_Reply\"\x00\x12\x31\n\tcheck_out\x12\x11.CheckOut_Request\x1a\x0f.CheckOut_Reply\"\x00\x12:\n\x0c\x63heck_in_grp\x12\x14.CheckIn_Grp_Request\x1a\x12.CheckIn_Grp_Reply\"\x00\x12=\n\rcheck_out_grp\x12\x15.CheckOut_Grp_Request\x1a\x13.CheckOut_Grp_Reply\"\x00\x12\x31\n\x0bget_history\x12\x10.History_Request\x1a\x0e.History_Reply\"\x00\x12\x37\n\x11\x64\x65lcare_locations\x12\x10.Declare_Request\x1a\x0e.Declare_Reply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13Tracetogether.proto\"?\n\x0f\x43heckIn_Request\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04nric\x18\x02 \x01(\t\x12\x10\n\x08location\x18\x03 \x01(\t\" \n\rCheckIn_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\" \n\x10\x43heckOut_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\"!\n\x0e\x43heckOut_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"C\n\x13\x43heckIn_Grp_Request\x12\x0c\n\x04name\x18\x01 \x03(\t\x12\x0c\n\x04nric\x18\x02 \x03(\t\x12\x10\n\x08location\x18\x03 \x01(\t\"$\n\x11\x43heckIn_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"$\n\x14\x43heckOut_Grp_Request\x12\x0c\n\x04nric\x18\x01 \x03(\t\"%\n\x12\x43heckOut_Grp_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1f\n\x0fHistory_Request\x12\x0c\n\x04nric\x18\x01 \x01(\t\" \n\rHistory_Reply\x12\x0f\n\x07history\x18\x01 \x03(\t\"?\n\x0f\x44\x65\x63lare_Request\x12\x10\n\x08location\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\t\" \n\rDeclare_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x16\n\x14ViewLocation_Request\"&\n\x12ViewLocation_Reply\x12\x10\n\x08location\x18\x01 \x03(\t\"*\n\x16RemoveLocation_Request\x12\x10\n\x08location\x18\x01 \x01(\t\"\'\n\x14RemoveLocation_Reply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x16\n\x14ViewAffected_Request\"%\n\x12ViewAffected_Reply\x12\x0f\n\x07message\x18\x01 \x03(\t2\x9e\x04\n\rTracetogether\x12.\n\x08\x63heck_in\x12\x10.CheckIn_Request\x1a\x0e.CheckIn_Reply\"\x00\x12\x31\n\tcheck_out\x12\x11.CheckOut_Request\x1a\x0f.CheckOut_Reply\"\x00\x12:\n\x0c\x63heck_in_grp\x12\x14.CheckIn_Grp_Request\x1a\x12.CheckIn_Grp_Reply\"\x00\x12=\n\rcheck_out_grp\x12\x15.CheckOut_Grp_Request\x1a\x13.CheckOut_Grp_Reply\"\x00\x12\x31\n\x0bget_history\x12\x10.History_Request\x1a\x0e.History_Reply\"\x00\x12\x37\n\x11\x64\x65lcare_locations\x12\x10.Declare_Request\x1a\x0e.Declare_Reply\"\x00\x12>\n\x0eview_locations\x12\x15.ViewLocation_Request\x1a\x13.ViewLocation_Reply\"\x00\x12\x44\n\x10remove_locations\x12\x17.RemoveLocation_Request\x1a\x15.RemoveLocation_Reply\"\x00\x12=\n\rview_affected\x12\x15.ViewAffected_Request\x1a\x13.ViewAffected_Reply\"\x00\x62\x06proto3')
 
 
 
@@ -30,6 +30,12 @@ _HISTORY_REQUEST = DESCRIPTOR.message_types_by_name['History_Request']
 _HISTORY_REPLY = DESCRIPTOR.message_types_by_name['History_Reply']
 _DECLARE_REQUEST = DESCRIPTOR.message_types_by_name['Declare_Request']
 _DECLARE_REPLY = DESCRIPTOR.message_types_by_name['Declare_Reply']
+_VIEWLOCATION_REQUEST = DESCRIPTOR.message_types_by_name['ViewLocation_Request']
+_VIEWLOCATION_REPLY = DESCRIPTOR.message_types_by_name['ViewLocation_Reply']
+_REMOVELOCATION_REQUEST = DESCRIPTOR.message_types_by_name['RemoveLocation_Request']
+_REMOVELOCATION_REPLY = DESCRIPTOR.message_types_by_name['RemoveLocation_Reply']
+_VIEWAFFECTED_REQUEST = DESCRIPTOR.message_types_by_name['ViewAffected_Request']
+_VIEWAFFECTED_REPLY = DESCRIPTOR.message_types_by_name['ViewAffected_Reply']
 CheckIn_Request = _reflection.GeneratedProtocolMessageType('CheckIn_Request', (_message.Message,), {
   'DESCRIPTOR' : _CHECKIN_REQUEST,
   '__module__' : 'Tracetogether_pb2'
@@ -114,6 +120,48 @@ Declare_Reply = _reflection.GeneratedProtocolMessageType('Declare_Reply', (_mess
   })
 _sym_db.RegisterMessage(Declare_Reply)
 
+ViewLocation_Request = _reflection.GeneratedProtocolMessageType('ViewLocation_Request', (_message.Message,), {
+  'DESCRIPTOR' : _VIEWLOCATION_REQUEST,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:ViewLocation_Request)
+  })
+_sym_db.RegisterMessage(ViewLocation_Request)
+
+ViewLocation_Reply = _reflection.GeneratedProtocolMessageType('ViewLocation_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _VIEWLOCATION_REPLY,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:ViewLocation_Reply)
+  })
+_sym_db.RegisterMessage(ViewLocation_Reply)
+
+RemoveLocation_Request = _reflection.GeneratedProtocolMessageType('RemoveLocation_Request', (_message.Message,), {
+  'DESCRIPTOR' : _REMOVELOCATION_REQUEST,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:RemoveLocation_Request)
+  })
+_sym_db.RegisterMessage(RemoveLocation_Request)
+
+RemoveLocation_Reply = _reflection.GeneratedProtocolMessageType('RemoveLocation_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _REMOVELOCATION_REPLY,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:RemoveLocation_Reply)
+  })
+_sym_db.RegisterMessage(RemoveLocation_Reply)
+
+ViewAffected_Request = _reflection.GeneratedProtocolMessageType('ViewAffected_Request', (_message.Message,), {
+  'DESCRIPTOR' : _VIEWAFFECTED_REQUEST,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:ViewAffected_Request)
+  })
+_sym_db.RegisterMessage(ViewAffected_Request)
+
+ViewAffected_Reply = _reflection.GeneratedProtocolMessageType('ViewAffected_Reply', (_message.Message,), {
+  'DESCRIPTOR' : _VIEWAFFECTED_REPLY,
+  '__module__' : 'Tracetogether_pb2'
+  # @@protoc_insertion_point(class_scope:ViewAffected_Reply)
+  })
+_sym_db.RegisterMessage(ViewAffected_Reply)
+
 _TRACETOGETHER = DESCRIPTOR.services_by_name['Tracetogether']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -142,6 +190,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _DECLARE_REQUEST._serialized_end=505
   _DECLARE_REPLY._serialized_start=507
   _DECLARE_REPLY._serialized_end=539
-  _TRACETOGETHER._serialized_start=542
-  _TRACETOGETHER._serialized_end=887
+  _VIEWLOCATION_REQUEST._serialized_start=541
+  _VIEWLOCATION_REQUEST._serialized_end=563
+  _VIEWLOCATION_REPLY._serialized_start=565
+  _VIEWLOCATION_REPLY._serialized_end=603
+  _REMOVELOCATION_REQUEST._serialized_start=605
+  _REMOVELOCATION_REQUEST._serialized_end=647
+  _REMOVELOCATION_REPLY._serialized_start=649
+  _REMOVELOCATION_REPLY._serialized_end=688
+  _VIEWAFFECTED_REQUEST._serialized_start=690
+  _VIEWAFFECTED_REQUEST._serialized_end=712
+  _VIEWAFFECTED_REPLY._serialized_start=714
+  _VIEWAFFECTED_REPLY._serialized_end=751
+  _TRACETOGETHER._serialized_start=754
+  _TRACETOGETHER._serialized_end=1296
 # @@protoc_insertion_point(module_scope)

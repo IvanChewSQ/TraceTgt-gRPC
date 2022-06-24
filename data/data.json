@@ -1,72 +1,52 @@
 {
+    "0": [
+        {
+            "nric": "S9618780G",
+            "name": "IVAN",
+            "location": "AMK",
+            "checkInDateTime": "2022-06-24 19:02:54",
+            "checkOutDateTime": "2022-06-24 19:07:19",
+            "ID": 0
+        }
+    ],
+    "1": [
+        {
+            "nric": "S9618780G",
+            "name": "JEREMY",
+            "location": "BEDOK",
+            "checkInDateTime": "2022-06-24 19:03:39",
+            "checkOutDateTime": "2022-06-24 19:07:19",
+            "ID": 1
+        }
+    ],
     "2": [
         {
-            "nric": "s9608507i",
-            "name": "s9608507i-1",
-            "location": "bedok",
-            "checkInDateTime": "2022-06-21 15:32:55",
-            "checkOutDateTime": "2022-06-21 15:40:19",
+            "nric": "S9618780G",
+            "name": "IVAN",
+            "location": "AMK",
+            "checkInDateTime": "2022-06-24 19:05:57",
+            "checkOutDateTime": "2022-06-24 19:07:19",
             "ID": 2
         }
     ],
     "3": [
         {
-            "nric": "s9608507i",
-            "name": "s9608507i-2",
-            "location": "bedok",
-            "checkInDateTime": "2022-06-21 15:32:55",
-            "checkOutDateTime": "2022-06-21 15:40:19",
+            "nric": "S9618781G",
+            "name": "JEREMY",
+            "location": "AMK",
+            "checkInDateTime": "2022-06-24 19:05:57",
+            "checkOutDateTime": "2022-06-24 19:06:54",
             "ID": 3
         }
     ],
     "4": [
         {
-            "nric": "s9608507i",
-            "name": "guy 1",
-            "location": "farmers market",
-            "checkInDateTime": "2022-06-21 15:40:07",
-            "checkOutDateTime": "2022-06-21 15:40:19",
+            "nric": "S9618781G",
+            "name": "BLAH BLAH",
+            "location": "AMK",
+            "checkInDateTime": "2022-06-24 19:05:57",
+            "checkOutDateTime": "2022-06-24 19:06:54",
             "ID": 4
-        }
-    ],
-    "5": [
-        {
-            "nric": "s9608507i",
-            "name": "guy 2",
-            "location": "farmers market",
-            "checkInDateTime": "2022-06-21 15:40:07",
-            "checkOutDateTime": "2022-06-21 15:40:19",
-            "ID": 5
-        }
-    ],
-    "6": [
-        {
-            "nric": "s9608507i",
-            "name": "guy 3",
-            "location": "farmers market",
-            "checkInDateTime": "2022-06-21 15:40:07",
-            "checkOutDateTime": "2022-06-21 15:40:19",
-            "ID": 6
-        }
-    ],
-    "7": [
-        {
-            "nric": "s9608507i",
-            "name": "guy 4",
-            "location": "farmers market",
-            "checkInDateTime": "2022-06-21 15:40:07",
-            "checkOutDateTime": "2022-06-21 15:40:19",
-            "ID": 7
-        }
-    ],
-    "8": [
-        {
-            "nric": "s9608507i",
-            "name": "guy 1",
-            "location": "bedok",
-            "checkInDateTime": "2022-06-21 15:40:36",
-            "checkOutDateTime": "",
-            "ID": 8
         }
     ]
 }

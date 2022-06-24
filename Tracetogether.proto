@@ -7,9 +7,12 @@ service Tracetogether {
     rpc check_in_grp (CheckIn_Grp_Request) returns (CheckIn_Grp_Reply) {}
     rpc check_out_grp (CheckOut_Grp_Request) returns (CheckOut_Grp_Reply) {}
     rpc get_history (History_Request) returns (History_Reply) {} // Get the history of the user
-
+    
     /* gRPC for MOH Officers*/
-    rpc delcare_locations (Declare_Request) returns (Declare_Reply) {}
+    rpc delcare_locations (Declare_Request) returns (Declare_Reply) {} // declare covid visited locations
+    rpc view_locations (ViewLocation_Request) returns (ViewLocation_Reply) {} // view covid visited locations
+    rpc remove_locations (RemoveLocation_Request) returns (RemoveLocation_Reply) {} // remove covid visited locations
+    rpc view_affected (ViewAffected_Request) returns (ViewAffected_Reply) {} // view affected users
 }
 
 message CheckIn_Request {
@@ -57,11 +60,35 @@ message History_Reply {
 }
 
 message Declare_Request {
-    string date = 1;
-    string time = 2;
-    string location = 3;
+    string location = 1;
+    string date = 2;
+    string time = 3;
 }
 
 message Declare_Reply {
     string message = 1;
+}
+
+message ViewLocation_Request {
+
+}
+
+message ViewLocation_Reply {
+    repeated string location = 1;
+}
+
+message RemoveLocation_Request {
+    string location = 1;
+}
+
+message RemoveLocation_Reply {
+    string message = 1;
+}
+
+message ViewAffected_Request {
+
+}
+
+message ViewAffected_Reply {
+    repeated string message = 1;
 }

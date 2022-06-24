@@ -20,8 +20,6 @@ def menu():
     print("[3] Group Check In")
     print("[4] Group Check Out")
     print("[5] Retrieve Check In/Out History")
-    print("[6] Check Cases")
-    print("[7] Flag Cases")
     print("[0] Exit")
 
 
@@ -30,7 +28,7 @@ def menu():
 """
 def checkName():
     while True:
-        name = input("\nEnter Name: ")
+        name = input("\nEnter Name: ").upper()
         if re.match(name_regex, name):
             return name
         else: 
@@ -42,7 +40,7 @@ def checkName():
 """
 def checkNric():
     while True:
-        nric = input("Enter NRIC: ")
+        nric = input("Enter NRIC: ").upper()
         if re.match(nric_regex, nric):
             return nric
         else:
@@ -58,7 +56,7 @@ def checkNric():
 def check_in(stub):
     name = checkName()
     nric = checkNric()
-    location = input("Enter Location: ")
+    location = input("Enter Location: ").upper()
     response = stub.check_in(Tracetogether_pb2.CheckIn_Request
         (name = name, nric = nric, location = location))
     print(response.message + "\n")
@@ -104,7 +102,7 @@ def check_in_grp(stub):
         nameList.append(name)
         nricList.append(nric)
         i+=1
-    location = input("\nEnter Location: ")
+    location = input("\nEnter Location: ").upper()
     response = stub.check_in_grp(Tracetogether_pb2.CheckIn_Grp_Request
         (name = nameList, nric = nricList, location = location))
     print(response.message + "\n")
@@ -146,6 +144,7 @@ def check_out_grp(stub):
 '''
 def get_history(stub):
     nric = checkNric()
+    """
     response=stub.get_history(Tracetogether_pb2.History_Request
         (nric=nric))  
 
@@ -156,7 +155,11 @@ def get_history(stub):
     history_list = history_list[:-1]
     history_list += '.'
 
-    print("Your history for the past 14 days: \n", history_list)
+    print("Your history for the past 14 days: \n", history_list)"""
+
+
+    response = stub.get_history(Tracetogether_pb2.ViewLocation_Request(nric=nric))
+    print("Your history for the past 14 days: \n", response.history)
 
 def check_cases(stub,name,nric):
     response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))

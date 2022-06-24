@@ -1,7 +1,6 @@
 from datetime import datetime
 from concurrent import futures
-from datetime import date, datetime
-from email import message
+from datetime import datetime
 import logging
 import grpc
 import database
@@ -11,7 +10,7 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     
     def __init__(self):
         self.db = database.Database()
-    
+
 
     """
         Function to checkin:
@@ -60,7 +59,7 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         for nric in request.nric:
             self.db.updateDetails(nric, checkout_time)
-        return Tracetogether_pb2.CheckOut_Grp_Reply(message=" GroupCheck Out Successful")
+        return Tracetogether_pb2.CheckOut_Grp_Reply(message="GroupCheck Out Successfulat " + checkout_time)
     
 
     """
@@ -69,44 +68,49 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (2) Retrieve data from Json file
     """
     def get_history(self, request, context):
-        get_history = str(self.db.getHistory(request.nric))
-        print(get_history[::])
-
-        return Tracetogether_pb2.History_Reply(hist=get_history)
-
-    def flag_cases(self, request, context):
-        self.db.flagCases(request.nric, request.location)
-        return Tracetogether_pb2.Flag_Reply(message = "Case Flagged")
-        
-    def get_location(self, request, context):
-        return Tracetogether_pb2.Location_Reply(locationList=self.db.getLocation())
+        #get_history = str(self.db.getHistory(request.nric))
+        get_history = self.db.getHistory(request.nric)
+        print(get_history)
+        return Tracetogether_pb2.History_Reply(history=get_history)
 
 
     """
         Function to declare covid location:
-        (1) Tally NRIC
-        (2) Retrieve data from Json file
+        (1) Set location, date and time 
+        (2) Save details into Json file
     """
     def delcare_locations(self, request, context):
-        self.db.covidLocation(request.location, request.date, request.time)
-        
-        #TODO add in notification
-
-        return Tracetogether_pb2.Declare_Reply(message = "Location ("+ request.location +") declared as Covid-19 cluster")
+        self.db.set_covidLocation(request.location, request.date, request.time)
+        return Tracetogether_pb2.Declare_Reply(message = "'"+ request.location + 
+            "' declared as Covid-19 visited location on "+ request.date +" at " + request.time + "hrs ")
 
 
+    """
+        Function to view all declared covid locations:
+        (1) Retrieve all locations with its number of days being declared from Json file
+    """
+    def view_locations(self, request, context):
+        view_location = self.db.view_covidLocation()
+        return Tracetogether_pb2.ViewLocation_Reply(location = view_location)
+    
 
+    """
+        Function to remove declared covid locations:
+        (1) Remove location from Json file
+    """
+    def remove_locations(self, request, context):
+        self.db.remove_covidLocation(request.location)
+        return Tracetogether_pb2.RemoveLocation_Reply(message = "'"+ request.location + 
+            "' has been removed from the Covid-19 visited location")
 
+    
+    """
+        Function to view all users that are affected
+    """
+    def view_affected(self, request, context):
+        affected = self.db.view_affected()
+        return Tracetogether_pb2.RemoveLocation_Reply(message = affected)
 
-
-
-
-
-
-
-
-    def Check_cases(self, request, context):
-        return Tracetogether_pb2.Location_Reply(locationList=self.db.getCases(request.nric, self.db.getLocation()))
 
 def serve():
     listen_addr = '[::]:50051'

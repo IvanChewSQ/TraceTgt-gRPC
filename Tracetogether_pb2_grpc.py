@@ -44,6 +44,21 @@ class TracetogetherStub(object):
                 request_serializer=Tracetogether__pb2.Declare_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.Declare_Reply.FromString,
                 )
+        self.view_locations = channel.unary_unary(
+                '/Tracetogether/view_locations',
+                request_serializer=Tracetogether__pb2.ViewLocation_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.ViewLocation_Reply.FromString,
+                )
+        self.remove_locations = channel.unary_unary(
+                '/Tracetogether/remove_locations',
+                request_serializer=Tracetogether__pb2.RemoveLocation_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.RemoveLocation_Reply.FromString,
+                )
+        self.view_affected = channel.unary_unary(
+                '/Tracetogether/view_affected',
+                request_serializer=Tracetogether__pb2.ViewAffected_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.ViewAffected_Reply.FromString,
+                )
 
 
 class TracetogetherServicer(object):
@@ -86,6 +101,24 @@ class TracetogetherServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def view_locations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def remove_locations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def view_affected(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_TracetogetherServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -118,6 +151,21 @@ def add_TracetogetherServicer_to_server(servicer, server):
                     servicer.delcare_locations,
                     request_deserializer=Tracetogether__pb2.Declare_Request.FromString,
                     response_serializer=Tracetogether__pb2.Declare_Reply.SerializeToString,
+            ),
+            'view_locations': grpc.unary_unary_rpc_method_handler(
+                    servicer.view_locations,
+                    request_deserializer=Tracetogether__pb2.ViewLocation_Request.FromString,
+                    response_serializer=Tracetogether__pb2.ViewLocation_Reply.SerializeToString,
+            ),
+            'remove_locations': grpc.unary_unary_rpc_method_handler(
+                    servicer.remove_locations,
+                    request_deserializer=Tracetogether__pb2.RemoveLocation_Request.FromString,
+                    response_serializer=Tracetogether__pb2.RemoveLocation_Reply.SerializeToString,
+            ),
+            'view_affected': grpc.unary_unary_rpc_method_handler(
+                    servicer.view_affected,
+                    request_deserializer=Tracetogether__pb2.ViewAffected_Request.FromString,
+                    response_serializer=Tracetogether__pb2.ViewAffected_Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -228,5 +276,56 @@ class Tracetogether(object):
         return grpc.experimental.unary_unary(request, target, '/Tracetogether/delcare_locations',
             Tracetogether__pb2.Declare_Request.SerializeToString,
             Tracetogether__pb2.Declare_Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def view_locations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/view_locations',
+            Tracetogether__pb2.ViewLocation_Request.SerializeToString,
+            Tracetogether__pb2.ViewLocation_Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def remove_locations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/remove_locations',
+            Tracetogether__pb2.RemoveLocation_Request.SerializeToString,
+            Tracetogether__pb2.RemoveLocation_Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def view_affected(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/view_affected',
+            Tracetogether__pb2.ViewAffected_Request.SerializeToString,
+            Tracetogether__pb2.ViewAffected_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
