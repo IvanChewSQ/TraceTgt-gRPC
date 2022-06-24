@@ -63,12 +63,9 @@ class Database():
         for ID, value in self.data_file.items():   # loop through all the items in the dictionary
             for i in value:
                 if i["nric"] == nric:
-                    history_list.append(i["location"])
-                    history_list.append(i["checkInDateTime"])
-                    history_list.append(i["checkOutDateTime"])
+                    history_list.append("Location: "+ i["location"] +", Checkin: " +
+                        i["checkInDateTime"] +", Checkout : " + i["checkOutDateTime"])
          
-        #history = [history_list[i:i + 3] for i in range(0, len(history_list), 3)]   # create a list of lists in 3 entries
-
         return history_list
 
 

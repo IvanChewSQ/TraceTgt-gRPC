@@ -3,7 +3,7 @@ import logging
 from mimetypes import init
 import grpc
 import re
-import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
+import Tracetogether_pb2, Tracetogether_pb2_grpc
 
 """
     Regex for User Input
@@ -144,30 +144,8 @@ def check_out_grp(stub):
 '''
 def get_history(stub):
     nric = checkNric()
-    """
-    response=stub.get_history(Tracetogether_pb2.History_Request
-        (nric=nric))  
-
-    history_list = ''   
-
-    for word in response.history:
-        history_list += str(word + "")
-    history_list = history_list[:-1]
-    history_list += '.'
-
-    print("Your history for the past 14 days: \n", history_list)"""
-
-
-    response = stub.get_history(Tracetogether_pb2.ViewLocation_Request(nric=nric))
+    response = stub.get_history(Tracetogether_pb2.History_Request(nric=nric))
     print("Your history for the past 14 days: \n", response.history)
-
-def check_cases(stub,name,nric):
-    response=stub.check_cases(Tracetogether_pb2.Check_cases_Request(name=name,nric=nric))
-    print(response.message)
-
-def flag_cases(stub,name,nric):
-    response=stub.flag_cases(Tracetogether_pb2.Flag_cases_Request(name=name,nric=nric))
-    print(response.message)
 
 
 if __name__ == '__main__':

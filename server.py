@@ -68,10 +68,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (2) Retrieve data from Json file
     """
     def get_history(self, request, context):
-        #get_history = str(self.db.getHistory(request.nric))
         get_history = self.db.getHistory(request.nric)
-        print(get_history)
-        return Tracetogether_pb2.History_Reply(history=get_history)
+        return Tracetogether_pb2.History_Reply(history = get_history)
 
 
     """
