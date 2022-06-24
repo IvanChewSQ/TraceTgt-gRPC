@@ -49,15 +49,6 @@ class Database():
         Function to update users checkout time in json file
         Arguments: nric, checkout time
     """
-    def getHistory(self, nric, checkout_time):
-        #TODO get the list of History based on input NRIC
-        pass
-
-
-    """
-        Function to update users checkout time in json file
-        Arguments: nric, checkout time
-    """
     def covidLocation(self, location, date, time):
         cluster = {
             location: [
