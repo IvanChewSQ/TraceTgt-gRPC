@@ -35,7 +35,7 @@
             "name": "JEREMY",
             "location": "AMK",
             "checkInDateTime": "2022-06-24 19:05:57",
-            "checkOutDateTime": "2022-06-24 19:06:54",
+            "checkOutDateTime": "",
             "ID": 3
         }
     ],
@@ -45,8 +45,48 @@
             "name": "BLAH BLAH",
             "location": "AMK",
             "checkInDateTime": "2022-06-24 19:05:57",
-            "checkOutDateTime": "2022-06-24 19:06:54",
+            "checkOutDateTime": "",
             "ID": 4
+        }
+    ],
+    "5": [
+        {
+            "nric": "S9608507I",
+            "name": "JEREMY",
+            "location": "AMK",
+            "checkInDateTime": "2022-06-25 01:53:15",
+            "checkOutDateTime": "2022-06-25 01:57:00",
+            "ID": 5
+        }
+    ],
+    "6": [
+        {
+            "nric": "S9608507I",
+            "name": "JEREMY",
+            "location": "BEDOK",
+            "checkInDateTime": "2022-06-25 01:53:28",
+            "checkOutDateTime": "2022-06-25 01:57:00",
+            "ID": 6
+        }
+    ],
+    "7": [
+        {
+            "nric": "S9608507I",
+            "name": "S9608507I",
+            "location": "S9608507I",
+            "checkInDateTime": "2022-06-25 02:09:35",
+            "checkOutDateTime": "2022-06-25 02:10:50",
+            "ID": 7
+        }
+    ],
+    "8": [
+        {
+            "nric": "S9608507I",
+            "name": "S9608507I",
+            "location": "S9608507I",
+            "checkInDateTime": "2022-06-25 02:10:56",
+            "checkOutDateTime": "2022-06-25 02:11:01",
+            "ID": 8
         }
     ]
 }

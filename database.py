@@ -2,6 +2,8 @@ from asyncio.windows_events import NULL
 import json
 from datetime import timedelta, datetime
 
+from sqlalchemy import false
+
 class Database():
     
     """
@@ -44,8 +46,8 @@ class Database():
     def updateDetails(self, nric, dateTime):
         ID = 0 + len(self.data_file)-1 # get last ID
         for ID, value in self.data_file.items():    # loop through all the items in the dictionary
-            for i in value:
-                if i["nric"] == nric:
+            for i in value:                    # loop through all the items in the list
+                if i["nric"] == nric and i["checkOutDateTime"] == "": # if nric matches with the nric in the list and check out datetime is not empty
                     i["checkOutDateTime"] = dateTime
 
         json_obj = json.dumps(self.data_file, indent=4)
@@ -113,19 +115,17 @@ class Database():
         Arguments: location
     """
     def remove_covidLocation(self, location):
-        for ID, value in self.cluster_file.items():    # loop through all the items in the dictionary
-            for i in value: 
-                if i["location"] == location:   # if the location is found
-                    del self.cluster_file[ID]   # remove the location from the dictionary
+        ID = 0 + len(self.data_file)-1
+        for ID, value in self.cluster_file.items():
+            for i in value:
+                if i["location"] == location:
+                    del self.cluster_file[ID]
                     json_obj = json.dumps(self.cluster_file, indent=4)
                     with open("data/cluster.json", "w") as out:
                         out.write(json_obj)
-                    return True
-                    
+                else:
+                    print("Location not found")
 
-        json_obj = json.dumps(self.cluster_file, indent=4)
-        with open("data/cluster.json", "w") as out:
-            out.write(json_obj)
 
     
     """
@@ -133,8 +133,21 @@ class Database():
         Arguments: location
     """
     def view_affected(self):
-        #TODO implement logic
-        pass
+        ID = 0 + len(self.data_file)-1
+        for ID, value in self.cluster_file.items():
+            for i in value:
+                print(i["location"])
+                
+
+    
+
+
+        if self.cluster_file:
+            return True
+
+        return False
+
+        
 
 
 
@@ -181,7 +194,6 @@ class Database():
         cur = now - timedelta(days=14)
       
         visitedLocation = self.data_file[nric]
-        # print(visitedLocation)
         for j in visitedLocation:
             locations = j["location"]
             locationDateTime = j["checkInDateTime"]

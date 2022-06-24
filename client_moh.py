@@ -17,8 +17,10 @@ time_regex = re.compile(r"^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
 """
 def menu():
     print("\n[1] Declare COVID-19 visited locations")
-    print("[2] Diaplay all details of COVID-19 visited locations")
+    print("[2] Display all details of COVID-19 visited locations")
     print("[3] View all potential affected users")
+    print("[4] Remove COVID-19 visited locations")
+    print("[5] Find Affected Users")
     print("[0] Exit")
 
 
@@ -80,7 +82,7 @@ def view_location(stub):
 def remove_locations(stub):
     location = input("\nEnter Location to remove: ").upper()
     response = stub.remove_locations(Tracetogether_pb2.RemoveLocation_Request
-        (location = location))
+        (location = location))            
     print(response.message + "\n")
 
 
@@ -89,6 +91,7 @@ def remove_locations(stub):
 '''
 def view_affected(stub):
     response = stub.view_affected(Tracetogether_pb2.ViewAffected_Request())
+
     print(response.message + "\n")
 
 
@@ -122,6 +125,12 @@ if __name__ == '__main__':
                             continue
                 
                 elif choice == 3:
+                    view_affected(stub)
+
+                elif choice == 4:
+                    remove_locations(stub)
+
+                elif choice == 5:
                     view_affected(stub)
 
                 elif choice == 0:
