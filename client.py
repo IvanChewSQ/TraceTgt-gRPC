@@ -15,12 +15,12 @@ nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
     Menu Selection for User
 """
 def menu():
-    print("\n[1] Individual Check In")
+    print("[1] Individual Check In")
     print("[2] Individual Check Out")
     print("[3] Group Check In")
     print("[4] Group Check Out")
     print("[5] Retrieve Check In/Out History")
-    print("[0] Exit")
+    print("[0] Exit\n")
 
 
 """
@@ -28,7 +28,7 @@ def menu():
 """
 def checkName():
     while True:
-        name = input("\nEnter Name: ").upper()
+        name = input("Enter Name: ").upper()
         if re.match(name_regex, name):
             return name
         else: 
@@ -69,6 +69,7 @@ def check_in(stub):
     3. Display server output 
 '''
 def check_out(stub):
+    print()
     nric = checkNric()
     response = stub.check_out(Tracetogether_pb2.CheckOut_Request
         (nric = nric))
@@ -96,18 +97,26 @@ def check_in_grp(stub):
             break
     i = 1
     while (i <= member):
-        print("\nDetails for member #", i)
-        name = checkName()
-        nric = checkNric()
-        nameList.append(name)
-        nricList.append(nric)
-        i+=1
+        while True: 
+            print("\nDetails for member #", i)
+            name = checkName()
+            nric = checkNric()
+            if (nric not in nricList):
+                nameList.append(name)
+                nricList.append(nric)
+                i+=1
+                break
+            else:
+                i = 1
+                print ("\nDuplicated NRIC, please check all input fields again")
+        
     location = input("\nEnter Location: ").upper()
     response = stub.check_in_grp(Tracetogether_pb2.CheckIn_Grp_Request
         (name = nameList, nric = nricList, location = location))
     print(response.message + "\n")
 
-    
+
+
 '''
     (Group) Check-out Functionality 
     1. Request the number of family members
@@ -127,10 +136,16 @@ def check_out_grp(stub):
             break
     i = 1
     while (i <= member):
-        print("\nDetails for member #", i)
-        nric = checkNric()
-        nricList.append(nric)
-        i+=1
+        while True: 
+            print("\nDetails for member #", i)
+            nric = checkNric()
+            if (nric not in nricList):
+                nricList.append(nric)
+                i+=1
+                break
+            else:
+                i = 1
+                print ("\nDuplicated NRIC, please check all input fields again")
     response = stub.check_out_grp(Tracetogether_pb2.CheckOut_Grp_Request
         (nric = nricList))
     print(response.message + "\n")
