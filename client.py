@@ -11,16 +11,18 @@ import Tracetogether_pb2, Tracetogether_pb2_grpc
 name_regex = re.compile(r"[A-Za-z]+")
 nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
 
+
 """
     Menu Selection for User
 """
 def menu():
-    print("[1] Individual Check In")
+    print("\n[1] Individual Check In")
     print("[2] Individual Check Out")
     print("[3] Group Check In")
     print("[4] Group Check Out")
     print("[5] Retrieve Check In/Out History")
-    print("[0] Exit\n")
+    print("[6] Retrive Covid19 Declared Locations")
+    print("[0] Exit")
 
 
 """
@@ -54,12 +56,13 @@ def checkNric():
     3. Display server output
 '''
 def check_in(stub):
+    print()
     name = checkName()
     nric = checkNric()
     location = input("Enter Location: ").upper()
     response = stub.check_in(Tracetogether_pb2.CheckIn_Request
         (name = name, nric = nric, location = location))
-    print(response.message + "\n")
+    print(response.message)
 
 
 '''
@@ -73,7 +76,7 @@ def check_out(stub):
     nric = checkNric()
     response = stub.check_out(Tracetogether_pb2.CheckOut_Request
         (nric = nric))
-    print(response.message + "\n")
+    print(response.message)
 
 
 '''
@@ -97,8 +100,9 @@ def check_in_grp(stub):
             break
     i = 1
     while (i <= member):
-        while True: 
-            print("\nDetails for member #", i)
+        while True:
+            print() 
+            print("Details for member #", i)
             name = checkName()
             nric = checkNric()
             if (nric not in nricList):
@@ -115,7 +119,7 @@ def check_in_grp(stub):
     location = input("\nEnter Location: ").upper()
     response = stub.check_in_grp(Tracetogether_pb2.CheckIn_Grp_Request
         (name = nameList, nric = nricList, location = location))
-    print(response.message + "\n")
+    print(response.message)
 
 
 
@@ -147,10 +151,11 @@ def check_out_grp(stub):
                 break
             else:
                 i = 1
+                nricList.clear()
                 print ("\nDuplicated NRIC, please check all input fields again")
     response = stub.check_out_grp(Tracetogether_pb2.CheckOut_Grp_Request
         (nric = nricList))
-    print(response.message + "\n")
+    print(response.message)
 
 
 '''
@@ -160,9 +165,20 @@ def check_out_grp(stub):
     3. Display output
 '''
 def get_history(stub):
+    print()
     nric = checkNric()
     response = stub.get_history(Tracetogether_pb2.History_Request(nric=nric))
     print("Your history for the past 14 days: \n", response.history)
+
+
+'''
+    Function to view all declared COVID-19 location with the number of days 
+        with respect from the date it was being declared to today
+'''
+def view_location(stub):
+    print()
+    response = stub.view_locations(Tracetogether_pb2.ViewLocation_Request())
+    print("Declared COVID-19 locations: \n", response.location)
 
 
 if __name__ == '__main__':
@@ -188,6 +204,9 @@ if __name__ == '__main__':
                 
                 elif choice == 5:
                     get_history(stub)
+
+                elif choice == 6:
+                    view_location(stub)
 
                 elif choice == 0:
                     exit()

@@ -57,7 +57,8 @@ def checkTime():
     1. Request date, time and location from users
 '''
 def declare_location(stub):
-    location = input("\nEnter Location: ").upper()
+    print()
+    location = input("Enter Location: ").upper()
     date = checkDate()
     time = checkTime()
     response = stub.delcare_locations(Tracetogether_pb2.Declare_Request
@@ -71,6 +72,7 @@ def declare_location(stub):
         with respect from the date it was being declared to today
 '''
 def view_location(stub):
+    print()
     response = stub.view_locations(Tracetogether_pb2.ViewLocation_Request())
     print("Declared COVID-19 locations: \n", response.location)
 
@@ -79,10 +81,11 @@ def view_location(stub):
     Function to remove selected declared COVID-19 location 
 '''
 def remove_location(stub):
-    location = input("\nEnter Location to remove: ").upper()
+    print()
+    location = input("Enter Location to remove: ").upper()
     response = stub.remove_locations(Tracetogether_pb2.RemoveLocation_Request
         (location = location))            
-    print(response.message + "\n")
+    print(response.message)
 
 
 if __name__ == '__main__':

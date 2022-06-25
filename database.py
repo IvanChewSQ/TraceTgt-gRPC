@@ -115,17 +115,14 @@ class Database():
         Parameters: location
     """
     def remove_covidLocation(self, location):
-        ID = 0 + len(self.data_file)-1 # get last ID
-        for ID, value in self.cluster_file.items():
-            for i in value:
-                if i["location"] == location:
-                    del self.cluster_file[ID]
+        for ID, value in self.cluster_file.items():    # loop through all the items in the dictionary
+            for i in value: 
+                if i["location"] == location:   # if the location is found
+                    del self.cluster_file[ID]   # remove the location from the dictionary
                     json_obj = json.dumps(self.cluster_file, indent=4)
                     with open("data/cluster.json", "w") as out:
                         out.write(json_obj)
-                    return ("'{}' has been removed from the Covid-19 visited location", location)
-                else:
-                    return ("Location not found")
+                    return True
 
 
     '''Function to check if user has visited an infected location within past 14 days
