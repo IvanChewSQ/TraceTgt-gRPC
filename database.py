@@ -1,6 +1,8 @@
 from asyncio.windows_events import NULL
+from cmath import inf
 import json
 from datetime import timedelta, datetime
+from numpy import append
 
 from sqlalchemy import false
 
@@ -67,7 +69,7 @@ class Database():
                 if i["nric"] == nric:
                     history_list.append("Location: "+ i["location"] +", Checkin: " +
                         i["checkInDateTime"] +", Checkout : " + i["checkOutDateTime"])
-         
+
         return history_list
 
 
@@ -77,13 +79,13 @@ class Database():
     """
     def set_covidLocation(self, location, date, time):
         ID = 0 + len(self.cluster_file)-1
-        if ID in self.cluster_file :    # if the ID is already in the dictionary
+        if ID in self.cluster_file :  # if the ID is already in the dictionary
+            print("ID is already in use, incrementing index...")   
             ID = ID + 1                 # increment the ID
-            print("ID is already in use, incrementing index...")    
             data = {
                 ID: [
                     {
-                        "location": location,
+                        "cluster_location": location,
                         "date": date,
                         "time": time,
                         "ID": ID
@@ -113,7 +115,6 @@ class Database():
                 
         return location_list
 
-
     """
         Function to remove declared Covid-19 Locations
         Parameters: location
@@ -131,23 +132,41 @@ class Database():
     '''Function to check if user has visited an infected location within past 14 days
     Args: nric of user and list of infected locations
     Returns TODO'''
-    def notify_covid_location(self, nric, infectedLocation: list):
+    def notify_covid_location(self, nric):
+        today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
+        infected_list=[]
+
+        for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
+            for i in value: 
+                if i["nric"] == nric:   # if the nric is found
+                    for ID, value in self.cluster_file.items():  # loop through all the items in the cluster.json dictionary
+                        for i in value: # loop through all the items in the list
+
+                            date = datetime.strptime(i["date"],"%Y-%m-%d")  # convert date to datetime
+                            delta = today - date
+                                                    # get the difference between today and date
+                            if delta.days <= 14:                     # if the difference is less than 14 days
+                                if i["location"] == i["cluster_location"]:    # if the location is found
+                                    infected_list.append(i["location"]+ " - Days ago "+str(delta.days)) # add the location to the list
+                                    return infected_list
+
+
         LocationList = []
 
         now = datetime.now()
         cur = now - timedelta(days=14)
       
-        visitedLocation = self.data_file[nric]
-        for j in visitedLocation:
+        visitedLocation = self.data_file[nric]  # get the list of visited locations
+        for j in visitedLocation:   # loop through all the items in the list
             locations = j["location"]
             locationDateTime = j["checkInDateTime"]
             locationDateTime = datetime.strptime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
 
-            if locationDateTime > cur and locations in infectedLocation:
+            if locationDateTime > cur and locations in infectedLocation:    # if the location is visited within past 14 days and is in the list of infected locations
                 locationDateTime = datetime.strftime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
-                LocationList.append(locations)
-                LocationList.append(locationDateTime)
+                LocationList.append(locations)  # add the location to the list
+                LocationList.append(locationDateTime)   # add the date and time to the list
     
 
-        print(LocationList)
-        return LocationList
+        print(LocationList) 
+        return LocationList # return the list of locations and date and time

@@ -101,10 +101,18 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         return Tracetogether_pb2.RemoveLocation_Reply(message = "'"+ request.location + 
             "' has been removed from the Covid-19 visited location")
 
+
+    """
+        Function to notify users if they have been in a covid location for the past 14 days
+    """
+
     def notify_covid_location(self, request, context):
-        self.db.notify_covid_location(request.nric)
-        return Tracetogether_pb2.Notify_Covid_Reply(message = "'"+ request.location + 
-            "' has been notified to the Covid-19 visited location")
+        notify_covid= self.db.notify_covid_location(request.nric)
+        
+        print(infected_list)
+        return Tracetogether_pb2.Notify_Covid_Reply(message = "Notification sent to " + notify_covid)
+            
+        
             
 
 
