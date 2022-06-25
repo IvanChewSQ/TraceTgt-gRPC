@@ -8,7 +8,7 @@ import Tracetogether_pb2, Tracetogether_pb2_grpc
 """
     Regex for User Input
 """
-name_regex = re.compile(r"[A-Za-z]+")
+name_regex = re.compile(r"^[\-'a-zA-Z ]+$")
 nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
 
 
