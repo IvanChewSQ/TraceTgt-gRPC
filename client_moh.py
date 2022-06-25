@@ -40,14 +40,17 @@ def checkDate():
 """
     Function to get Time input and check 
 """
-def checkTime():
+def checkTime(date):
     while True:
         time = input("Enter Time (HH:MM): ")
         if re.match(time_regex, time):
-            if time <= str(datetime.now().strftime("%H:%M")):
-                return time
+            if (date == datetime.now().strftime("%Y-%m-%d")):
+                if time <= str(datetime.now().strftime("%H:%M")):
+                    return time
+                else:
+                    print("Invalid Time, please enter a time in the past")
             else:
-                print("Invalid Time, please enter a time in the past")
+                return time
         else:
              print("Invalid Time format, please follow the format of (HH:MM)")
 
@@ -60,7 +63,7 @@ def declare_location(stub):
     print()
     location = input("Enter Location: ").upper()
     date = checkDate()
-    time = checkTime()
+    time = checkTime(date)
     response = stub.delcare_locations(Tracetogether_pb2.Declare_Request
         (location = location, date = date, time = time))
     print(response.message + "\n")

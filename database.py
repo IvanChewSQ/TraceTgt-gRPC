@@ -76,7 +76,7 @@ class Database():
         Parameters: location, date, time
     """
     def set_covidLocation(self, location, date, time):
-        ID = 0 + len(self.cluster_file) # get last ID
+        ID = self.cluster_file.ID # get last ID
         cluster = {
             ID: [
                 {
