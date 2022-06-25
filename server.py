@@ -4,7 +4,7 @@ from datetime import datetime
 import logging
 import grpc
 import database
-import Tracetogether_pb2 as Tracetogether_pb2, Tracetogether_pb2_grpc as Tracetogether_pb2_grpc
+import Tracetogether_pb2, Tracetogether_pb2_grpc
 
 class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     
