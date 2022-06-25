@@ -1,7 +1,7 @@
 {
     "0": [
         {
-            "cluster_location": "S9608507I",
+            "cluster_location": "amk",
             "date": "2022-06-25",
             "time": "14:00",
             "ID": 0
@@ -9,9 +9,17 @@
     ],
     "1": [
         {
-            "cluster_location": "S9608507I",
-            "date": "2022-06-22",
+            "cluster_location": "bedok",
+            "date": "2022-06-25",
             "time": "14:00",
+            "ID": 1
+        }
+    ],
+    "1": [
+        {
+            "cluster_location": "QWE123",
+            "date": "2022-06-24",
+            "time": "20:46",
             "ID": 1
         }
     ]

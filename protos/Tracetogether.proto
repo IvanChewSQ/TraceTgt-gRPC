@@ -90,5 +90,5 @@ message Notify_Covid_Request {
 }
 
 message Notify_Covid_Reply {
-    string message = 1;
+    repeated string message = 1;
 }

@@ -136,19 +136,18 @@ class Database():
     def notify_covid_location(self, nric):
         today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
         infected_list=[]
+        
         ID = 0 + len(self.cluster_file)-1   # get last ID
         for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
             for i in value: 
                 if i["nric"] == nric:   # if the nric is found
-                    for ID, value in self.cluster_file.items():  # loop through all the items in the cluster.json dictionary
-                        for i in value: # loop through all the items in the list
-                            date = datetime.strptime(i["date"],"%Y-%m-%d")  # convert date to datetime
-                            delta = today - date                            
-                            if delta.days <= 0:                            
-                                if i["cluster_location"] == self.data_file[ID][0]["location"]:  # if the location is the same as the location in the data.json
-                                    infected_list.append(i["location"]+ " - Days ago "+str(delta.days))
-                                    print(infected_list)
-                                    return infected_list
+                    for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
+                        for i in value:
+                            date = datetime.strptime(i["date"],"%Y-%m-%d")
+                            delta = today - date
+                            if delta.days <= 14:    # if the date is within the last 14 days
+                                infected_list.append(i["cluster_location"]+ " - " + str(delta.days) + " Days ago at " + i["time"])  # add the location and date to the list
+        return infected_list
 
 
         # LocationList = []

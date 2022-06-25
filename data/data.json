@@ -108,5 +108,15 @@
             "checkOutDateTime": "",
             "ID": 10
         }
+    ],
+    "11": [
+        {
+            "nric": "S9608507I",
+            "name": "JEREMY CHNG",
+            "location": "QWE123",
+            "checkInDateTime": "2022-06-24 20:46:55",
+            "checkOutDateTime": "2022-06-25 20:46:55",
+            "ID": 11
+        }
     ]
 }
