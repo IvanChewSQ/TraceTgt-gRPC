@@ -136,7 +136,7 @@ class Database():
     def notify_covid_location(self, nric):
         today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
         infected_list=[]
-        ID = 0 + len(self.cluster_file)-1
+        ID = 0 + len(self.cluster_file)-1   # get last ID
         for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
             for i in value: 
                 if i["nric"] == nric:   # if the nric is found
