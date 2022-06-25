@@ -76,6 +76,7 @@ class Database():
         Parameters: location, date, time
     """
     def set_covidLocation(self, location, date, time):
+<<<<<<< HEAD
         ID = 0 + len(self.cluster_file)-1
         if ID in self.cluster_file :    # if the ID is already in the dictionary
             ID = ID + 1                 # increment the ID
@@ -95,6 +96,23 @@ class Database():
             with open("data/cluster.json", "w") as out:
                 out.write(json_obj)
             return True
+=======
+        ID = self.cluster_file.ID # get last ID
+        cluster = {
+            ID: [
+                {
+                    "date": date,
+                    "time": time,
+                    "location": location
+                }
+            ]
+        }
+        self.cluster_file.update(cluster)
+        json_obj = json.dumps(self.cluster_file, indent=4)
+        with open("data/cluster.json", "w") as out:
+            out.write(json_obj)
+    
+>>>>>>> 9c3bc8eeb79ed2ff1aeb911296b6b231efc989aa
 
     """
         Function to view all declared Covid-19 Locations with the number of days 

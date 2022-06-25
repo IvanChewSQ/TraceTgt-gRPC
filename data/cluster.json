@@ -1,10 +1,23 @@
 {
     "0": [
         {
+<<<<<<< HEAD
             "location": "AMK",
             "date": "1111-11-11",
             "time": "14:00",
             "ID": 0
+=======
+            "date": "2022-06-25",
+            "time": "14:00",
+            "location": "AMK"
+        }
+    ],
+    "2": [
+        {
+            "date": "2022-06-21",
+            "time": "14:00",
+            "location": "BEDOK"
+>>>>>>> 9c3bc8eeb79ed2ff1aeb911296b6b231efc989aa
         }
     ]
 }
