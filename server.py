@@ -106,8 +106,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         Function to view all users that are affected
     """
     def view_affected(self, request, context):
-        affected = self.db.view_affected()
-        return Tracetogether_pb2.RemoveLocation_Reply(message = affected)
+        message = affected_users = self.db.view_affectedUsers()
+        return Tracetogether_pb2.ViewAffected_Reply(message = message)
 
 
 def serve():

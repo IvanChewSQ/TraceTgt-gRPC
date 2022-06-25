@@ -112,7 +112,7 @@ class Database():
 
     """
         Function to remove declared Covid-19 Locations
-        Arguments: location
+        Parameters: location
     """
     def remove_covidLocation(self, location):
         ID = 0 + len(self.data_file)-1
@@ -123,16 +123,15 @@ class Database():
                     json_obj = json.dumps(self.cluster_file, indent=4)
                     with open("data/cluster.json", "w") as out:
                         out.write(json_obj)
+                    return ("'{}' has been removed from the Covid-19 visited location", location)
                 else:
-                    print("Location not found")
+                    return ("Location not found")
 
 
-    
     """
-        Function to remove declared Covid-19 Locations
-        Arguments: location
+        Function to obtain potential affected users
     """
-    def view_affected(self):
+    def view_affectedUsers(self):
         ID = 0 + len(self.data_file)-1
         for ID, value in self.cluster_file.items():
             for i in value:
