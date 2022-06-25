@@ -22,6 +22,7 @@ def menu():
     print("[4] Group Check Out")
     print("[5] Retrieve Check In/Out History")
     print("[6] Retrive Covid19 Declared Locations")
+    print("[7] Notify users of visited Covid19 locations in the past 14 days")
     print("[0] Exit")
 
 
@@ -177,8 +178,15 @@ def get_history(stub):
 '''
 def view_location(stub):
     print()
+    
     response = stub.view_locations(Tracetogether_pb2.ViewLocation_Request())
     print("Declared COVID-19 locations: \n", response.location)
+
+def notify_location(stub):
+    print()
+    nric = checkNric()
+    response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request(nric=nric))
+    print("Notified users of visited COVID-19 locations: \n", response.message)
 
 
 if __name__ == '__main__':
@@ -207,6 +215,9 @@ if __name__ == '__main__':
 
                 elif choice == 6:
                     view_location(stub)
+
+                elif choice == 7:
+                    notify_location(stub)
 
                 elif choice == 0:
                     exit()

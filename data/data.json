@@ -88,5 +88,25 @@
             "checkOutDateTime": "2022-06-25 02:11:01",
             "ID": 8
         }
+    ],
+    "9": [
+        {
+            "nric": "S9608507I",
+            "name": "JEREMY ",
+            "location": "S9608507I",
+            "checkInDateTime": "2022-06-25 16:58:29",
+            "checkOutDateTime": "2022-06-25 17:00:22",
+            "ID": 9
+        }
+    ],
+    "10": [
+        {
+            "nric": "S9608507I",
+            "name": "JERERMY",
+            "location": "S9608507I",
+            "checkInDateTime": "2022-06-25 17:11:18",
+            "checkOutDateTime": "",
+            "ID": 10
+        }
     ]
 }

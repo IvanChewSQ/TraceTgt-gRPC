@@ -6,13 +6,13 @@ service Tracetogether {
     rpc check_out (CheckOut_Request) returns (CheckOut_Reply) {} // Check out with the server
     rpc check_in_grp (CheckIn_Grp_Request) returns (CheckIn_Grp_Reply) {}
     rpc check_out_grp (CheckOut_Grp_Request) returns (CheckOut_Grp_Reply) {}
-    rpc get_history (History_Request) returns (History_Reply) {} // Get the history of the user
-    rpc notify_covid_location (Notify_Covid_Request) returns (Notify_Covid_Reply) {} // Notify the user of a COVID-19 case location
+    rpc get_history (History_Request) returns (History_Reply) {} // Get the history of the user // Notify the user of a COVID-19 case location
     
     /* gRPC for MOH Officers*/
     rpc delcare_locations (Declare_Request) returns (Declare_Reply) {} // declare covid visited locations
     rpc view_locations (ViewLocation_Request) returns (ViewLocation_Reply) {} // view covid visited locations
-    rpc remove_locations (RemoveLocation_Request) returns (RemoveLocation_Reply) {} // remove covid visited locations
+    rpc remove_locations (RemoveLocation_Request) returns (RemoveLocation_Reply) {}
+    rpc notify_covid_location (Notify_Covid_Request) returns (Notify_Covid_Reply) {} // remove covid visited locations
 }
 
 message CheckIn_Request {
@@ -82,5 +82,13 @@ message RemoveLocation_Request {
 }
 
 message RemoveLocation_Reply {
+    string message = 1;
+}
+
+message Notify_Covid_Request {
+    string nric = 1;
+}
+
+message Notify_Covid_Reply {
     string message = 1;
 }

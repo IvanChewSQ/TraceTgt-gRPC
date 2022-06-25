@@ -108,12 +108,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     def notify_covid_location(self, request, context):
         notify_covid= self.db.notify_covid_location(request.nric)
-        
-        print(infected_list)
-        return Tracetogether_pb2.Notify_Covid_Reply(message = "Notification sent to " + notify_covid)
-            
-        
-            
+        print(notify_covid)
+        return Tracetogether_pb2.Notify_Covid_Reply(message = notify_covid)
 
 
 def serve():
