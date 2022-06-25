@@ -108,6 +108,8 @@ def check_in_grp(stub):
                 break
             else:
                 i = 1
+                nameList.clear()
+                nricList.clear()
                 print ("\nDuplicated NRIC, please check all input fields again")
         
     location = input("\nEnter Location: ").upper()
