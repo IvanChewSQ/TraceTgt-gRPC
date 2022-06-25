@@ -12,7 +12,6 @@ service Tracetogether {
     rpc delcare_locations (Declare_Request) returns (Declare_Reply) {} // declare covid visited locations
     rpc view_locations (ViewLocation_Request) returns (ViewLocation_Reply) {} // view covid visited locations
     rpc remove_locations (RemoveLocation_Request) returns (RemoveLocation_Reply) {} // remove covid visited locations
-    rpc view_affected (ViewAffected_Request) returns (ViewAffected_Reply) {} // view affected users
 }
 
 message CheckIn_Request {
@@ -83,12 +82,4 @@ message RemoveLocation_Request {
 
 message RemoveLocation_Reply {
     string message = 1;
-}
-
-message ViewAffected_Request {
-
-}
-
-message ViewAffected_Reply {
-    repeated string message = 1;
 }

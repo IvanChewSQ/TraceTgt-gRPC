@@ -19,7 +19,6 @@ def menu():
     print("\n[1] Declare COVID-19 visited locations")
     print("[2] Display all details of COVID-19 visited locations")
     print("[3] Remove COVID-19 visited locations")
-    print("[4] View all potential affected users")
     print("[0] Exit")
 
 
@@ -64,6 +63,7 @@ def declare_location(stub):
     response = stub.delcare_locations(Tracetogether_pb2.Declare_Request
         (location = location, date = date, time = time))
     print(response.message + "\n")
+    print("Notification will be sent to the affected users")
 
 
 '''
@@ -85,15 +85,6 @@ def remove_location(stub):
     print(response.message + "\n")
 
 
-'''
-    Function to view all people who are affected 
-'''
-def view_affected(stub):
-    response = stub.view_affected(Tracetogether_pb2.ViewAffected_Request())
-    print("All potential affected users: \n" +response.message)
-
-
-
 if __name__ == '__main__':
     logging.basicConfig()
     with grpc.insecure_channel('localhost:50051') as channel:
@@ -111,9 +102,6 @@ if __name__ == '__main__':
                 
                 elif choice == 3:
                     remove_location(stub)
-
-                elif choice == 4:
-                    view_affected(stub)
 
                 elif choice == 0:
                     exit()

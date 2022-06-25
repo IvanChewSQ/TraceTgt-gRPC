@@ -101,14 +101,6 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         return Tracetogether_pb2.RemoveLocation_Reply(message = "'"+ request.location + 
             "' has been removed from the Covid-19 visited location")
 
-    
-    """
-        Function to view all users that are affected
-    """
-    def view_affected(self, request, context):
-        message = affected_users = self.db.view_affectedUsers()
-        return Tracetogether_pb2.ViewAffected_Reply(message = message)
-
 
 def serve():
     listen_addr = '[::]:50051'
