@@ -76,21 +76,25 @@ class Database():
         Parameters: location, date, time
     """
     def set_covidLocation(self, location, date, time):
-        ID = 0 + len(self.cluster_file) # get last ID
-        cluster = {
-            ID: [
-                {
-                    "date": date,
-                    "time": time,
-                    "location": location
-                }
-            ]
-        }
-        self.cluster_file.update(cluster)
-        json_obj = json.dumps(self.cluster_file, indent=4)
-        with open("data/cluster.json", "w") as out:
-            out.write(json_obj)
-    
+        ID = 0 + len(self.cluster_file)-1
+        if ID in self.cluster_file :    # if the ID is already in the dictionary
+            ID = ID + 1                 # increment the ID
+            print("ID is already in use, incrementing index...")    
+            data = {
+                ID: [
+                    {
+                        "location": location,
+                        "date": date,
+                        "time": time,
+                        "ID": ID
+                    }
+                ]
+            }
+            self.cluster_file.update(data)
+            json_obj = json.dumps(self.cluster_file, indent=4)
+            with open("data/cluster.json", "w") as out:
+                out.write(json_obj)
+            return True
 
     """
         Function to view all declared Covid-19 Locations with the number of days 
@@ -124,11 +128,10 @@ class Database():
                         out.write(json_obj)
                     return True
 
-
     '''Function to check if user has visited an infected location within past 14 days
     Args: nric of user and list of infected locations
     Returns TODO'''
-    def getCases(self, nric, infectedLocation: list):
+    def notify_covid_location(self, nric, infectedLocation: list):
         LocationList = []
 
         now = datetime.now()
@@ -144,6 +147,7 @@ class Database():
                 locationDateTime = datetime.strftime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
                 LocationList.append(locations)
                 LocationList.append(locationDateTime)
+    
 
         print(LocationList)
         return LocationList

@@ -101,6 +101,12 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         return Tracetogether_pb2.RemoveLocation_Reply(message = "'"+ request.location + 
             "' has been removed from the Covid-19 visited location")
 
+    def notify_covid_location(self, request, context):
+        self.db.notify_covid_location(request.nric)
+        return Tracetogether_pb2.Notify_Covid_Reply(message = "'"+ request.location + 
+            "' has been notified to the Covid-19 visited location")
+            
+
 
 def serve():
     listen_addr = '[::]:50051'

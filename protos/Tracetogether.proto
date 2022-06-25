@@ -7,6 +7,7 @@ service Tracetogether {
     rpc check_in_grp (CheckIn_Grp_Request) returns (CheckIn_Grp_Reply) {}
     rpc check_out_grp (CheckOut_Grp_Request) returns (CheckOut_Grp_Reply) {}
     rpc get_history (History_Request) returns (History_Reply) {} // Get the history of the user
+    rpc notify_covid_location (Notify_Covid_Request) returns (Notify_Covid_Reply) {} // Notify the user of a COVID-19 case location
     
     /* gRPC for MOH Officers*/
     rpc delcare_locations (Declare_Request) returns (Declare_Reply) {} // declare covid visited locations
