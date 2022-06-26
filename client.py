@@ -3,6 +3,7 @@ import logging
 from mimetypes import init
 import grpc
 import re
+import sys
 import Tracetogether_pb2, Tracetogether_pb2_grpc
 
 """
@@ -10,7 +11,7 @@ import Tracetogether_pb2, Tracetogether_pb2_grpc
 """
 name_regex = re.compile(r"^[\-'a-zA-Z ]+$")
 nric_regex = re.compile(r"(?i)^[STFG]\d{7}[A-Z]$")
-
+    
 
 """
     Menu Selection for User
@@ -21,8 +22,7 @@ def menu():
     print("[3] Group Check In")
     print("[4] Group Check Out")
     print("[5] Retrieve Check In/Out History")
-    print("[6] Retrive Covid19 Declared Locations")
-    print("[7] Notify users of visited Covid19 locations in the past 14 days")
+    print("[6] View Covid19 Declared Locations")
     print("[0] Exit")
 
 
@@ -56,10 +56,9 @@ def checkNric():
     2. Trigger gRPC to server for checkin
     3. Display server output
 '''
-def check_in(stub):
+def check_in(stub, nric):
     print()
     name = checkName()
-    nric = checkNric()
     location = input("Enter Location: ").upper()
     response = stub.check_in(Tracetogether_pb2.CheckIn_Request
         (name = name, nric = nric, location = location))
@@ -72,9 +71,8 @@ def check_in(stub):
     2. Trigger gRPC to server for checkout
     3. Display server output 
 '''
-def check_out(stub):
+def check_out(stub, nric):
     print()
-    nric = checkNric()
     response = stub.check_out(Tracetogether_pb2.CheckOut_Request
         (nric = nric))
     print(response.message)
@@ -165,11 +163,12 @@ def check_out_grp(stub):
     2. Trigger gRPC to retrieve all history record associated with the nric
     3. Display output
 '''
-def get_history(stub):
+def get_history(stub, nric):
     print()
-    nric = checkNric()
     response = stub.get_history(Tracetogether_pb2.History_Request(nric=nric))
-    print("Your history for the past 14 days: \n", response.history)
+    print("\nCheck In/Out History:",)
+    for i in response.history:
+        print(i, end = "\n")
 
 
 '''
@@ -178,31 +177,44 @@ def get_history(stub):
 '''
 def view_location(stub):
     print()
-    
     response = stub.view_locations(Tracetogether_pb2.ViewLocation_Request())
-    print("Declared COVID-19 locations: \n", response.location)
+    print("Declared COVID-19 locations:")
+    for i in response.location:
+        print(i, end = "\n")
 
+
+'''
+    Notification function if user had checkin to a declared location for the past 14 days
+'''
 def notify_location(stub):
     print()
-    nric = checkNric()
-    response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request(nric=nric))
-    print("Notified users of visited COVID-19 locations: \n", response.message)
+    response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request
+        (nric=nric))
+
+    if response is None:
+        print("************************** WARNING **************************")
+        print("You had visited the following Covid-19 Locations in the past 14 days: \n")
+        for i in response.message:
+            print(i, end = "\n")
+        print("*************************************************************")
 
 
 if __name__ == '__main__':
+    nric = sys.argv[1]
     logging.basicConfig()
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = Tracetogether_pb2_grpc.TracetogetherStub(channel)
         while True:
             try:
+                notify_location(stub)
                 menu()
                 choice = int(input("Enter an option: "))
 
                 if choice == 1:
-                    check_in(stub)
+                    check_in(stub, nric)
                 
                 elif choice == 2:
-                    check_out(stub)
+                    check_out(stub,nric)
                 
                 elif choice == 3:
                     check_in_grp(stub)
@@ -211,13 +223,10 @@ if __name__ == '__main__':
                     check_out_grp(stub)
                 
                 elif choice == 5:
-                    get_history(stub)
+                    get_history(stub, nric)
 
                 elif choice == 6:
-                    view_location(stub)
-
-                elif choice == 7:
-                    notify_location(stub)
+                    view_location(stub)                   
 
                 elif choice == 0:
                     exit()

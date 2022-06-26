@@ -39,6 +39,11 @@ class TracetogetherStub(object):
                 request_serializer=Tracetogether__pb2.History_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.History_Reply.FromString,
                 )
+        self.notify_covid_location = channel.unary_unary(
+                '/Tracetogether/notify_covid_location',
+                request_serializer=Tracetogether__pb2.Notify_Covid_Request.SerializeToString,
+                response_deserializer=Tracetogether__pb2.Notify_Covid_Reply.FromString,
+                )
         self.delcare_locations = channel.unary_unary(
                 '/Tracetogether/delcare_locations',
                 request_serializer=Tracetogether__pb2.Declare_Request.SerializeToString,
@@ -53,11 +58,6 @@ class TracetogetherStub(object):
                 '/Tracetogether/remove_locations',
                 request_serializer=Tracetogether__pb2.RemoveLocation_Request.SerializeToString,
                 response_deserializer=Tracetogether__pb2.RemoveLocation_Reply.FromString,
-                )
-        self.notify_covid_location = channel.unary_unary(
-                '/Tracetogether/notify_covid_location',
-                request_serializer=Tracetogether__pb2.Notify_Covid_Request.SerializeToString,
-                response_deserializer=Tracetogether__pb2.Notify_Covid_Reply.FromString,
                 )
 
 
@@ -94,6 +94,12 @@ class TracetogetherServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def notify_covid_location(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def delcare_locations(self, request, context):
         """gRPC for MOH Officers
         """
@@ -108,12 +114,6 @@ class TracetogetherServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def remove_locations(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def notify_covid_location(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -147,6 +147,11 @@ def add_TracetogetherServicer_to_server(servicer, server):
                     request_deserializer=Tracetogether__pb2.History_Request.FromString,
                     response_serializer=Tracetogether__pb2.History_Reply.SerializeToString,
             ),
+            'notify_covid_location': grpc.unary_unary_rpc_method_handler(
+                    servicer.notify_covid_location,
+                    request_deserializer=Tracetogether__pb2.Notify_Covid_Request.FromString,
+                    response_serializer=Tracetogether__pb2.Notify_Covid_Reply.SerializeToString,
+            ),
             'delcare_locations': grpc.unary_unary_rpc_method_handler(
                     servicer.delcare_locations,
                     request_deserializer=Tracetogether__pb2.Declare_Request.FromString,
@@ -161,11 +166,6 @@ def add_TracetogetherServicer_to_server(servicer, server):
                     servicer.remove_locations,
                     request_deserializer=Tracetogether__pb2.RemoveLocation_Request.FromString,
                     response_serializer=Tracetogether__pb2.RemoveLocation_Reply.SerializeToString,
-            ),
-            'notify_covid_location': grpc.unary_unary_rpc_method_handler(
-                    servicer.notify_covid_location,
-                    request_deserializer=Tracetogether__pb2.Notify_Covid_Request.FromString,
-                    response_serializer=Tracetogether__pb2.Notify_Covid_Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -263,6 +263,23 @@ class Tracetogether(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def notify_covid_location(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Tracetogether/notify_covid_location',
+            Tracetogether__pb2.Notify_Covid_Request.SerializeToString,
+            Tracetogether__pb2.Notify_Covid_Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def delcare_locations(request,
             target,
             options=(),
@@ -310,22 +327,5 @@ class Tracetogether(object):
         return grpc.experimental.unary_unary(request, target, '/Tracetogether/remove_locations',
             Tracetogether__pb2.RemoveLocation_Request.SerializeToString,
             Tracetogether__pb2.RemoveLocation_Reply.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def notify_covid_location(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Tracetogether/notify_covid_location',
-            Tracetogether__pb2.Notify_Covid_Request.SerializeToString,
-            Tracetogether__pb2.Notify_Covid_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

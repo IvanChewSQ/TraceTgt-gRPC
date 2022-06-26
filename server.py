@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from datetime import datetime
 from concurrent import futures
 from datetime import datetime
@@ -73,6 +74,15 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
 
     """
+        Function to notify users if they have been in a covid location for the past 14 days
+    """
+    def notify_covid_location(self, request, context):
+        notify_covid=self.db.notify_covid_location(request.nric)
+        print(notify_covid)
+        return Tracetogether_pb2.Notify_Covid_Reply(message = notify_covid)
+
+
+    """
         Function to declare covid location:
         (1) Set location, date and time 
         (2) Save details into Json file
@@ -97,20 +107,10 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
         (1) Remove location from Json file
     """
     def remove_locations(self, request, context):
-        self.db.remove_covidLocation(request.location)
-        return Tracetogether_pb2.RemoveLocation_Reply(message = "'"+ request.location + 
-            "' has been removed from the Covid-19 visited location")
-
-
-    """
-        Function to notify users if they have been in a covid location for the past 14 days
-    """
-
-    def notify_covid_location(self, request, context):
-        notify_covid= self.db.notify_covid_location(request.nric)
-        print(notify_covid)
-    
-        return Tracetogether_pb2.Notify_Covid_Reply(message = notify_covid)
+        message = self.db.remove_covidLocation(request.location)
+        if message is None:
+            message = "'"+ request.location + "' is not declared as a Covid-19 visited location"
+        return Tracetogether_pb2.RemoveLocation_Reply(message = message )
 
 
 def serve():

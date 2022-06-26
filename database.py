@@ -74,30 +74,97 @@ class Database():
 
 
     """
+        Function to check if user has visited an infected location within past 14 days
+        Parameters: NRIC
+    """   
+    def notify_covid_location(self, nric):
+        location=[]
+        date=[]
+        infected_list=[]
+        for ID, value in self.cluster_file.items():
+            for i in value: 
+                location.append(i["cluster_location"]),
+                date.append(i["date"])
+
+        for ID, value in self.data_file.items():
+            for i in value: 
+                if i["nric"] == nric:
+                    if i["location"] in location:
+                        index = location.index(i["location"])
+                        declaredate = datetime.strptime(date[index], "%Y-%m-%d")
+                        startdate = declaredate - timedelta(13)
+                        checkin = datetime.strptime(i["checkInDateTime"], "%Y-%m-%d %H:%M:%S")
+                        if startdate <= checkin <= declaredate:
+                            infected_list.append(i["location"] + " declared on" + date[index] + ". You had Check-In at "+ i["checkInDateTime"] + " and Check-Out at "+ i["checkOutDateTime"])
+        return infected_list
+        
+
+
+        """
+        infected_list=[]
+        ID = 0 + len(self.cluster_file)-1   # get last ID
+        for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
+            for i in value: 
+                if i["nric"] == nric:   # if the nric is found
+                    for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
+                        for j in value:
+                            if j["cluster_location"] == i["location"]:
+                                startdate = datetime.strptime(j["date"], "%Y-%m-%d")
+                                startdate = startdate - timedelta(days = 13) # considering the day in which the location is being declared as Day 1
+                            else:
+                                return ("No Covid-19 visited location found")                      
+        """
+
+        """
+        
+                            date = datetime.strptime(i["date"],"%Y-%m-%d")
+                            delta = today - date
+                            if delta.days <= 14:    # if the date is within the last 14 days
+                                if i["cluster_location"] == self.data_file[ID][0]["location"]:
+                                    infected_list.append(i["cluster_location"]+ " - " + str(delta.days + 1) + " Days ago at " + i["time"])  # add the location and date to the list
+                                    return infected_list
+        """
+        
+        """
+        for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
+            for i in value:
+                startdate = datetime.strptime(i["date"], "%Y-%m-%d")
+                covid_location.append(i["cluster_location"]),
+                covid_location.append(str(startdate - timedelta(days = 13)))  # considering the day in which the location is being declared as Day 1
+                covid_location.append(i["date"] + " " + i["time"])
+
+        for ID, value in self.data_file.items():  # loop through all the items in the data.json dictionary
+            for i in value:
+                if i["nric"] == nric && i["location"] == :
+         """
+
+
+        #today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
+
+
+    """
         Function to set Covid19 visited location
         Parameters: location, date, time
     """
     def set_covidLocation(self, location, date, time):
-        ID = 0 + len(self.cluster_file)-1
+        ID = 0 + len(self.cluster_file)
         if ID in self.cluster_file :  # if the ID is already in the dictionary
-            print("ID is already in use, incrementing index...")   
-            ID +=1
-        else:                 # increment the ID
-            data = {
-                ID: [
-                    {
-                        "cluster_location": location,
-                        "date": date,
-                        "time": time,
-                        "ID": ID
-                    }
-                ]
-            }
-            self.cluster_file.update(data)
-            json_obj = json.dumps(self.cluster_file, indent=4)
-            with open("data/cluster.json", "w") as out:
-                out.write(json_obj)
-            
+            ID +=1                     # increment the ID                 
+        data = {
+            ID: [
+                {
+                    "cluster_location": location,
+                    "date": date,
+                    "time": time,
+                    "ID": ID
+                }
+            ]
+        }
+        self.cluster_file.update(data)
+        json_obj = json.dumps(self.cluster_file, indent=4)
+        with open("data/cluster.json", "w") as out:
+            out.write(json_obj)
+
 
     """
         Function to view all declared Covid-19 Locations with the number of days 
@@ -112,7 +179,7 @@ class Database():
             for i in value:
                 date = datetime.strptime(i["date"],"%Y-%m-%d")
                 delta = today - date
-                location_list.append(i["cluster_location"] + " - Day "+str(delta.days))
+                location_list.append(i["cluster_location"] + " - Day "+ str(delta.days + 1))
                 
         return location_list
 
@@ -128,44 +195,4 @@ class Database():
                     json_obj = json.dumps(self.cluster_file, indent=4)
                     with open("data/cluster.json", "w") as out:
                         out.write(json_obj)
-                    return True
-
-    '''Function to check if user has visited an infected location within past 14 days
-    Args: nric of user and list of infected locations
-    Returns TODO'''
-    def notify_covid_location(self, nric):
-        today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
-        infected_list=[]
-        
-        ID = 0 + len(self.cluster_file)-1   # get last ID
-        for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
-            for i in value: 
-                if i["nric"] == nric:   # if the nric is found
-                    for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
-                        for i in value:
-                            date = datetime.strptime(i["date"],"%Y-%m-%d")
-                            delta = today - date
-                            if delta.days <= 14:    # if the date is within the last 14 days
-                                infected_list.append(i["cluster_location"]+ " - " + str(delta.days) + " Days ago at " + i["time"])  # add the location and date to the list
-        return infected_list
-
-
-        # LocationList = []
-
-        # now = datetime.now()
-        # cur = now - timedelta(days=14)
-      
-        # visitedLocation = self.data_file[nric]  # get the list of visited locations
-        # for j in visitedLocation:   # loop through all the items in the list
-        #     locations = j["location"]
-        #     locationDateTime = j["checkInDateTime"]
-        #     locationDateTime = datetime.strptime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
-
-        #     if locationDateTime > cur and locations in infectedLocation:    # if the location is visited within past 14 days and is in the list of infected locations
-        #         locationDateTime = datetime.strftime(locationDateTime, '%d/%m/%Y, %H:%M:%S')
-        #         LocationList.append(locations)  # add the location to the list
-        #         LocationList.append(locationDateTime)   # add the date and time to the list
-    
-
-        # print(LocationList) 
-        # return LocationList # return the list of locations and date and time
+                    return ("'"+ location + "' has been removed from the Covid-19 visited location")
