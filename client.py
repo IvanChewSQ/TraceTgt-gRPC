@@ -1,6 +1,7 @@
 from datetime import datetime
 import logging
 from mimetypes import init
+from queue import Empty
 import grpc
 import re
 import sys
@@ -190,7 +191,7 @@ def notify_location(stub):
     print()
     response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request
         (nric=nric))
-    if response != "":
+    if response.message:
         print("********************************************* WARNING *********************************************")
         print("You had visited the following Covid-19 Locations in the past 14 days: \n")
         for i in response.message:
