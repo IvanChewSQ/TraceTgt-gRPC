@@ -4,19 +4,49 @@
             "nric": "S9618780G",
             "name": "IVAN",
             "location": "BEDOK",
-            "checkInDateTime": "2022-06-26 15:14:55",
-            "checkOutDateTime": "2022-06-26 15:14:59",
+            "checkInDateTime": "2022-06-26 23:12:05",
+            "checkOutDateTime": "2022-06-26 23:13:59",
             "ID": 0
         }
     ],
     "1": [
         {
+            "nric": "S1234567F",
+            "name": "JOHN",
+            "location": "AMK HUB",
+            "checkInDateTime": "2022-06-26 23:13:42",
+            "checkOutDateTime": "2022-06-26 23:14:49",
+            "ID": 1
+        }
+    ],
+    "2": [
+        {
+            "nric": "S2312345F",
+            "name": "KRISSY",
+            "location": "AMK HUB",
+            "checkInDateTime": "2022-06-26 23:13:42",
+            "checkOutDateTime": "2022-06-26 23:14:49",
+            "ID": 2
+        }
+    ],
+    "3": [
+        {
+            "nric": "S9608507I",
+            "name": "JEREMY",
+            "location": "AMK HUB",
+            "checkInDateTime": "2022-06-26 23:13:42",
+            "checkOutDateTime": "2022-06-26 23:14:49",
+            "ID": 3
+        }
+    ],
+    "4": [
+        {
             "nric": "S9618780G",
             "name": "IVAN",
-            "location": "ORCHARD",
-            "checkInDateTime": "2022-06-26 15:16:19",
-            "checkOutDateTime": "2022-06-26 15:16:25",
-            "ID": 1
+            "location": "AMK HUB",
+            "checkInDateTime": "2022-06-26 23:13:42",
+            "checkOutDateTime": "2022-06-26 23:13:59",
+            "ID": 4
         }
     ]
 }
