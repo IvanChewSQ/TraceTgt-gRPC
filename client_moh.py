@@ -77,7 +77,9 @@ def declare_location(stub):
 def view_location(stub):
     print()
     response = stub.view_locations(Tracetogether_pb2.ViewLocation_Request())
-    print("Declared COVID-19 locations: \n", response.location)
+    print("Declared COVID-19 locations:")
+    for i in response.location:
+        print(i, end = "\n")
 
 
 '''

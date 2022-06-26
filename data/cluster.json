@@ -1,26 +1,42 @@
 {
     "0": [
         {
-            "cluster_location": "amk",
-            "date": "2022-06-25",
-            "time": "14:00",
+            "cluster_location": "BEDOK",
+            "date": "2022-06-20",
+            "time": "20:00",
             "ID": 0
         }
     ],
     "1": [
         {
-            "cluster_location": "bedok",
-            "date": "2022-06-25",
-            "time": "14:00",
+            "cluster_location": "ORCHARD",
+            "date": "2022-06-26",
+            "time": "08:00",
             "ID": 1
         }
     ],
-    "1": [
+    "2": [
         {
-            "cluster_location": "QWE123",
-            "date": "2022-06-24",
-            "time": "20:46",
-            "ID": 1
+            "cluster_location": "AMK",
+            "date": "2022-06-20",
+            "time": "14:33",
+            "ID": 2
+        }
+    ],
+    "3": [
+        {
+            "cluster_location": "SENTOSA",
+            "date": "2022-06-26",
+            "time": "11:11",
+            "ID": 3
+        }
+    ],
+    "4": [
+        {
+            "cluster_location": "YISHUN",
+            "date": "2022-06-13",
+            "time": "14:23",
+            "ID": 4
         }
     ]
 }
