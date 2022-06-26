@@ -1,7 +1,4 @@
-from datetime import datetime
 import logging
-from mimetypes import init
-from queue import Empty
 import grpc
 import re
 import sys
@@ -28,7 +25,7 @@ def menu():
 
 
 """
-    Function to get Name Input and check 
+    Function to get Name input and check 
 """
 def checkName():
     while True:
@@ -40,7 +37,7 @@ def checkName():
 
 
 """
-    Function to get NRIC Input and check 
+    Function to get NRIC input and check 
 """
 def checkNric():
     while True:
@@ -52,10 +49,11 @@ def checkNric():
 
 
 '''
-    (Individual) Check-in Functionality 
-    1. Request name, nric, location from users
+    (Individual) Check-in Functionality
+    Parameters: nric
+    1. Request name, location from users
     2. Trigger gRPC to server for checkin
-    3. Display server output
+    3. Display output message
 '''
 def check_in(stub, nric):
     print()
@@ -68,9 +66,9 @@ def check_in(stub, nric):
 
 '''
     (Individual) Check-out Functionality 
-    1. Request nric from users for search in database
-    2. Trigger gRPC to server for checkout
-    3. Display server output 
+    Parameters: nric
+    1. Trigger gRPC to server for checkout
+    2. Display output message
 '''
 def check_out(stub, nric):
     print()
@@ -82,9 +80,9 @@ def check_out(stub, nric):
 '''
     (Group) Check-in Functionality 
     1. Request the number of family members
-    2. Request all the name, nric and location from users
+    2. Request all the name, nric (with checks for duplication) and location from users
     3. Trigger gRPC to server for group checkin
-    4. Display server output
+    4. Display output message
 '''
 def check_in_grp(stub):
     nameList = []
@@ -126,9 +124,9 @@ def check_in_grp(stub):
 '''
     (Group) Check-out Functionality 
     1. Request the number of family members
-    2. Request all nric from users
+    2. Request all nric from users, check duplication of nric
     3. Trigger gRPC to server for group checkout
-    4. Display server output
+    4. Display output message
 '''
 def check_out_grp(stub):
     nricList = []
@@ -160,9 +158,9 @@ def check_out_grp(stub):
 
 '''
     Get History Functionality
-    1. Request nric from users
-    2. Trigger gRPC to retrieve all history record associated with the nric
-    3. Display output
+    Parameters: nric
+    1. Trigger gRPC to retrieve all history record associated with the nric
+    2. Display output message
 '''
 def get_history(stub, nric):
     print()
@@ -173,8 +171,8 @@ def get_history(stub, nric):
 
 
 '''
-    Function to view all declared COVID-19 location with the number of days 
-        with respect from the date it was being declared to today
+    Function to view all declared COVID-19 location;
+    also showing the number of days with respect from the date it was being declared to now()
 '''
 def view_location(stub):
     print()
@@ -186,8 +184,9 @@ def view_location(stub):
 
 '''
     Notification function if user had checkin to a declared location for the past 14 days
+    Parameters: nric
 '''
-def notify_location(stub):
+def notify_location(stub, nric):
     print()
     response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request
         (nric=nric))
@@ -206,7 +205,7 @@ if __name__ == '__main__':
         stub = Tracetogether_pb2_grpc.TracetogetherStub(channel)
         while True:
             try:
-                notify_location(stub)
+                notify_location(stub, nric)
                 menu()
                 choice = int(input("Enter an option: "))
 

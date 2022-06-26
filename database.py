@@ -1,10 +1,6 @@
-from asyncio.windows_events import NULL
-from cmath import inf
 import json
 from datetime import timedelta, datetime
 from numpy import append
-
-from sqlalchemy import false
 
 class Database():
     
@@ -41,8 +37,7 @@ class Database():
 
 
     """
-        Function to tally nric and update existing SafeEntry details 
-            with the check out datetime
+        Function to tally nric and update existing SafeEntry details with the check out datetime
         Parameters: nric, checkout datetime
     """
     def updateDetails(self, nric, dateTime):
@@ -58,7 +53,7 @@ class Database():
 
 
     """
-        Function to get list of locations visited by user
+        Function to get list of locations visited by user based on nric
         Parameters: nric
     """
     def getHistory(self, nric):
@@ -75,7 +70,7 @@ class Database():
 
     """
         Function to check if user has visited an infected location within past 14 days
-        Parameters: NRIC
+        Parameters: nric
     """   
     def notify_covid_location(self, nric):
         location=[]
@@ -83,67 +78,24 @@ class Database():
         infected_list=[]
         for ID, value in self.cluster_file.items():
             for i in value: 
-                location.append(i["cluster_location"]),
-                date.append(i["date"])
+                location.append(i["cluster_location"]), # store declared covid locations from cluster_file
+                date.append(i["date"])                  # store date from cluster_file
 
         for ID, value in self.data_file.items():
             for i in value: 
-                if i["nric"] == nric:
-                    if i["location"] in location:
-                        index = location.index(i["location"])
-                        declaredate = datetime.strptime(date[index], "%Y-%m-%d")
-                        startdate = declaredate - timedelta(13)
-                        checkin = datetime.strptime(i["checkInDateTime"], "%Y-%m-%d %H:%M:%S")
-                        if startdate.date() <= checkin.date() <= declaredate.date():
+                if i["nric"] == nric:   # tally the nric
+                    if i["location"] in location:   # check if users location matches with declared covid locations
+                        index = location.index(i["location"])   # obtain the index of matched location
+                        declaredate = datetime.strptime(date[index], "%Y-%m-%d")    # obtain the declared date based on the index and change it to datetime format
+                        startdate = declaredate - timedelta(13) # obtain the date (14 days before the declared date), assuming the date being declared as Day 1
+                        checkin = datetime.strptime(i["checkInDateTime"], "%Y-%m-%d %H:%M:%S")  # convert the user checkin time into datetime format
+                        if startdate.date() <= checkin.date() <= declaredate.date():    # check if the user checkin time falls within the 14 days
                             infected_list.append(i["location"] + " declared on " + date[index] + ". You had Check-In at "+ i["checkInDateTime"] + " and Check-Out at "+ i["checkOutDateTime"])
         return infected_list
-        
-
-
-        """
-        infected_list=[]
-        ID = 0 + len(self.cluster_file)-1   # get last ID
-        for ID, value in self.data_file.items():   # loop through all the items in the data.json dictionary
-            for i in value: 
-                if i["nric"] == nric:   # if the nric is found
-                    for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
-                        for j in value:
-                            if j["cluster_location"] == i["location"]:
-                                startdate = datetime.strptime(j["date"], "%Y-%m-%d")
-                                startdate = startdate - timedelta(days = 13) # considering the day in which the location is being declared as Day 1
-                            else:
-                                return ("No Covid-19 visited location found")                      
-        """
-
-        """
-        
-                            date = datetime.strptime(i["date"],"%Y-%m-%d")
-                            delta = today - date
-                            if delta.days <= 14:    # if the date is within the last 14 days
-                                if i["cluster_location"] == self.data_file[ID][0]["location"]:
-                                    infected_list.append(i["cluster_location"]+ " - " + str(delta.days + 1) + " Days ago at " + i["time"])  # add the location and date to the list
-                                    return infected_list
-        """
-        
-        """
-        for ID, value in self.cluster_file.items():   # loop through all the items in the cluster.json dictionary
-            for i in value:
-                startdate = datetime.strptime(i["date"], "%Y-%m-%d")
-                covid_location.append(i["cluster_location"]),
-                covid_location.append(str(startdate - timedelta(days = 13)))  # considering the day in which the location is being declared as Day 1
-                covid_location.append(i["date"] + " " + i["time"])
-
-        for ID, value in self.data_file.items():  # loop through all the items in the data.json dictionary
-            for i in value:
-                if i["nric"] == nric && i["location"] == :
-         """
-
-
-        #today = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
 
 
     """
-        Function to set Covid19 visited location
+        Function to add Covid19 visited location into cluster.json
         Parameters: location, date, time
     """
     def set_covidLocation(self, location, date, time):
@@ -167,8 +119,8 @@ class Database():
 
 
     """
-        Function to view all declared Covid-19 Locations with the number of days 
-            with respect from the date it was being declared to today
+        Function to view all declared COVID-19 location;
+        also showing the number of days with respect from the date it was being declared to now()
     """
     def view_covidLocation(self):
         location_list = []

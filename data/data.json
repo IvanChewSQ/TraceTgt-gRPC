@@ -48,5 +48,15 @@
             "checkOutDateTime": "2022-06-26 23:13:59",
             "ID": 4
         }
+    ],
+    "5": [
+        {
+            "nric": "S9618780G",
+            "name": "IVAN",
+            "location": "SENTOSA",
+            "checkInDateTime": "2022-06-26 23:47:20",
+            "checkOutDateTime": "2022-06-26 23:47:28",
+            "ID": 5
+        }
     ]
 }

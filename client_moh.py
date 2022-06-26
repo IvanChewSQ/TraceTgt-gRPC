@@ -58,6 +58,8 @@ def checkTime(date):
 '''
     Function to declare COVID-19 location
     1. Request date, time and location from users
+    2. Trigger gRPC request to server for declaration of covid location
+    3. Display output message
 '''
 def declare_location(stub):
     print()
@@ -71,8 +73,8 @@ def declare_location(stub):
 
 
 '''
-    Function to view all declared COVID-19 location with the number of days 
-        with respect from the date it was being declared to today
+    Function to view all declared COVID-19 location;
+    also showing the number of days with respect from the date it was being declared to now()
 '''
 def view_location(stub):
     print()
@@ -84,6 +86,9 @@ def view_location(stub):
 
 '''
     Function to remove selected declared COVID-19 location 
+    1. Request location from users
+    2. Trigger gRPC request to server for removal of covid location
+    3. Display output message
 '''
 def remove_location(stub):
     print()

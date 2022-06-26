@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from datetime import datetime
 from concurrent import futures
 from datetime import datetime
@@ -14,9 +13,10 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
 
     """
-        Function to checkin:
+        Function for individual checkin:
         (1) Generate checkin time
-        (2) Store data into Json file
+        (2) Query database to add user details and store into Json file
+        (3) Trigger gRPC to return output message
     """
     def check_in(self, request, context):
         checkin_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -25,10 +25,10 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
 
     """
-        Function to checkout:
-        (1) Tally NRIC
-        (2) Generate checkout time
-        (3) Store data into Json file
+        Function for individual checkout:
+        (1) Generate checkout time
+        (2) Query database to update checkout time associated to the nric and store into Json file
+        (3) Trigger gRPC to return output message
     """
     def check_out(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -39,7 +39,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
     """
         Function for group checkin:
         (1) Generate checkin time
-        (2) Store list data into Json file
+        (2) Query database to add a list of user details and store into Json file
+        (3) Trigger gRPC to return output message
     """
     def check_in_grp(self, request, context):
         i = 0        
@@ -52,9 +53,9 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     """
         Function for group checkout:
-        (1) Tally NRIC
-        (2) Generate checkout time
-        (3) Store data into Json file
+        (1) Generate checkout time
+        (2) Query database to update checkout time associated to the relevant nric(s) and store into Json file
+        (3) Trigger gRPC to return output message
     """
     def check_out_grp(self, request, context):
         checkout_time =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -65,8 +66,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     """
         Function to obtain the history:
-        (1) Tally NRIC
-        (2) Retrieve data from Json file
+        (1) Query database to retrieve all the details associated to the nric
+        (2) Trigger gRPC to return output message
     """
     def get_history(self, request, context):
         get_history = self.db.getHistory(request.nric)
@@ -75,16 +76,19 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     """
         Function to notify users if they have been in a covid location for the past 14 days
+        (1) Query database to retrieve all the details associated to the nric
+        (2) Trigger gRPC to return output message
     """
     def notify_covid_location(self, request, context):
-        notify_covid=self.db.notify_covid_location(request.nric)
+        notify_covid = self.db.notify_covid_location(request.nric)
         return Tracetogether_pb2.Notify_Covid_Reply(message = notify_covid)
 
 
     """
-        Function to declare covid location:
+        Function for MOH Officer to declare covid location:
         (1) Set location, date and time 
-        (2) Save details into Json file
+        (2) Query database to add location and store into Json file
+        (3) Trigger gRPC to return output message
     """
     def delcare_locations(self, request, context):
         self.db.set_covidLocation(request.location, request.date, request.time)
@@ -94,7 +98,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     """
         Function to view all declared covid locations:
-        (1) Retrieve all locations with its number of days being declared from Json file
+        (1) Query database to retrieve all locations with its number of days being declared from Json file
+        (2) Trigger gRPC to return output message
     """
     def view_locations(self, request, context):
         view_location = self.db.view_covidLocation()
@@ -103,7 +108,8 @@ class Tracetogether(Tracetogether_pb2_grpc.TracetogetherServicer):
 
     """
         Function to remove declared covid locations:
-        (1) Remove location from Json file
+        (1) Query database to remove location from Json file
+        (2) Trigger gRPC to return output message
     """
     def remove_locations(self, request, context):
         message = self.db.remove_covidLocation(request.location)
