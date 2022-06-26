@@ -44,8 +44,7 @@ In this client, you can do the following:
 - [6] View Covid19 Declared Locations
 
 ## Show case
-Screenshot 2022-06-27 025921.png
-
+![Screenshot 2022-06-27 025921](https://user-images.githubusercontent.com/73775846/175830119-848beb67-a521-4c18-92ee-47a5d031fb70.png)
 ## Concurrency showcase
-Screenshot 2022-06-27 030231.png
+![Screenshot 2022-06-27 030231](https://user-images.githubusercontent.com/73775846/175830128-cc744c52-10f8-4127-9b8c-cb1bec9e3f07.png)
 
