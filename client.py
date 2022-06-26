@@ -190,13 +190,12 @@ def notify_location(stub):
     print()
     response = stub.notify_covid_location(Tracetogether_pb2.Notify_Covid_Request
         (nric=nric))
-
-    if response is None:
-        print("************************** WARNING **************************")
+    if response != "":
+        print("********************************************* WARNING *********************************************")
         print("You had visited the following Covid-19 Locations in the past 14 days: \n")
         for i in response.message:
             print(i, end = "\n")
-        print("*************************************************************")
+        print("***************************************************************************************************")
 
 
 if __name__ == '__main__':

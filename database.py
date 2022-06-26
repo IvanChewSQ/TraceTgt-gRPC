@@ -94,8 +94,8 @@ class Database():
                         declaredate = datetime.strptime(date[index], "%Y-%m-%d")
                         startdate = declaredate - timedelta(13)
                         checkin = datetime.strptime(i["checkInDateTime"], "%Y-%m-%d %H:%M:%S")
-                        if startdate <= checkin <= declaredate:
-                            infected_list.append(i["location"] + " declared on" + date[index] + ". You had Check-In at "+ i["checkInDateTime"] + " and Check-Out at "+ i["checkOutDateTime"])
+                        if startdate.date() <= checkin.date() <= declaredate.date():
+                            infected_list.append(i["location"] + " declared on " + date[index] + ". You had Check-In at "+ i["checkInDateTime"] + " and Check-Out at "+ i["checkOutDateTime"])
         return infected_list
         
 
