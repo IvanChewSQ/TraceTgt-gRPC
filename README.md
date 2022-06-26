@@ -43,8 +43,9 @@ In this client, you can do the following:
 - [5] Retrieve Check In/Out History
 - [6] View Covid19 Declared Locations
 
-#### Show case
+## Show case
+Screenshot 2022-06-27 025921.png
 
-#### Concurrency showcase
-
+## Concurrency showcase
+Screenshot 2022-06-27 030231.png
 
