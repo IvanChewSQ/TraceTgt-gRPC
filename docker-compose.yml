@@ -1,11 +1,11 @@
 version: "3.7"
 
 services:
-  tracetogether_backend:
+  tracetogether_service:
     build: ./
-    container_name: tracetogether_backend
+    container_name: tracetogether_service
     volumes:
-      - database:/app/datas
+      - database:/app/data
     restart: always
     ports:
       - "50051:50051"

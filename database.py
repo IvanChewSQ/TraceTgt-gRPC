@@ -1,6 +1,5 @@
 import json
 from datetime import timedelta, datetime
-from numpy import append
 
 class Database():
     

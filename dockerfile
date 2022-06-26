@@ -30,6 +30,7 @@ COPY ./login.py /app
 RUN pip install --upgrade pip
 
 #Install python Dependecies
-RUN pip install --no-cache-dir -r requirements.txt --no-dependencies
+RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python", "-u", "server.py"]
+ENTRYPOINT ["python", "-u", "server.py", "login.py"]
+
