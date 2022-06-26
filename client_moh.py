@@ -52,7 +52,7 @@ def checkTime(date):
             else:
                 return time
         else:
-             print("Invalid Time format, please follow the format of (HH:MM)")
+            print("Invalid Time format, please follow the format of (HH:MM)")
 
 
 '''
