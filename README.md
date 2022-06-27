@@ -43,7 +43,7 @@ In this client, you can do the following:
 - [5] Retrieve Check In/Out History
 - [6] View Covid19 Declared Locations
 
-## Showcase
+## Client Showcase
 ![Screenshot 2022-06-27 025921](https://user-images.githubusercontent.com/73775846/175830119-848beb67-a521-4c18-92ee-47a5d031fb70.png)
 
 ## MOH Client Showcase
