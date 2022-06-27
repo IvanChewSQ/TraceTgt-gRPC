@@ -1,7 +1,7 @@
 # TracTgt-gRPC
 A CSC3004 Lab Assessment to create a client-server SafeEntry system using the gRPC protocol
 
-### Running the Program
+## Running the Program
 
 #### How to build docker image
 type the following commands under the working directory with the `dockerfile`
@@ -52,3 +52,9 @@ In this client, you can do the following:
 ## Concurrency Showcase
 ![Screenshot 2022-06-27 030231](https://user-images.githubusercontent.com/73775846/175830128-cc744c52-10f8-4127-9b8c-cb1bec9e3f07.png)
 
+## Testing Scenarios
+|S/n   	|Has the location been declared as a Covid-19 location?    	|Has the user visited the declared Covid-19 location before and is within the 14 days (inclusive)?   	|User to receive notification?|
+|---	|---	|---	|---	|
+|1   	|No  	|No  	|No   	|
+|2   	|Yes   	|No   	|No   	| 
+|3   	|Yes   	|Yes   	|Yes   	|
