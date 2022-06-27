@@ -49,6 +49,6 @@ In this client, you can do the following:
 ## MOH Client Showcase
 ![image](https://user-images.githubusercontent.com/73775846/175868097-80c94542-3869-435a-94b6-e4e22f9557d0.png)
 
-## Concurrency showcase
+## Concurrency Showcase
 ![Screenshot 2022-06-27 030231](https://user-images.githubusercontent.com/73775846/175830128-cc744c52-10f8-4127-9b8c-cb1bec9e3f07.png)
 
